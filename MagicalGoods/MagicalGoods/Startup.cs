@@ -28,7 +28,8 @@ namespace MagicalGoods
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            // enables razor pages, has MVC under the hood
+            services.AddRazorPages();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -60,7 +61,8 @@ namespace MagicalGoods
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
