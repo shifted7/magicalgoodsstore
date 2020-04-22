@@ -7,5 +7,6 @@ namespace MagicalGoods.Models
 {
     public class Product
     {
+        public int ID { get; set; }
     }
 }
