@@ -3,14 +3,16 @@ using MagicalGoods.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MagicalGoods.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    partial class StoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200422012258_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,37 +91,6 @@ namespace MagicalGoods.Migrations.StoreDb
                             Image = "https://media-waterdeep.cursecdn.com/avatars/thumbnails/7/120/1000/1000/636284708068284913.jpeg",
                             Name = "Bag of Holding",
                             Price = 400.00m
-                        },
-                        new
-                        {
-                            ID = 7,
-                            Description = "Just press a button, and this rod will fix itself in place. Defy gravity!",
-                            Image = "https://media-waterdeep.cursecdn.com/avatars/thumbnails/7/261/1000/1000/636284741670235041.jpeg",
-                            Name = "Immovable Rod",
-                            Price = 50.00m
-                        },
-                        new
-                        {
-                            ID = 8,
-                            Description = "Magically transform into anyone with just a small piece of their hair!",
-                            Image = "https://i.stack.imgur.com/LerE3.jpg",
-                            Name = "Polyjuice Potion",
-                            Price = 150.00m
-                        },
-                        new
-                        {
-                            ID = 9,
-                            Description = "Put on these slippers, and walk on any surface!",
-                            Image = "https://media-waterdeep.cursecdn.com/avatars/thumbnails/7/402/1000/1000/636284767446806965.jpeg",
-                            Name = "Slippers of Spider Climb",
-                            Price = 250.00m
-                        },
-                        new
-                        {
-                            ID = 10,
-                            Description = "A powerful wand with a core made from the feather of a pheonix",
-                            Name = "Pheonix-core Wand",
-                            Price = 1000.00m
                         });
                 });
 #pragma warning restore 612, 618

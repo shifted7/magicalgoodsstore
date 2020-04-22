@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicalGoods.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200420211440_initial")]
-    partial class initial
+    [Migration("20200422012238_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
