@@ -1,4 +1,33 @@
 ﻿@page
 @model MagicalGoods.Pages.Account.RegisterModel
 @{
+    ViewData["Title"] = "Login";
 }
+
+    <form method="post">
+        <div asp-validation-summary="All"></div>
+        <hr />
+
+        <label asp-for="UserData.FirstName"></label>
+        <input asp-for="UserData.FirstName" />
+        <span asp-validation-for="UserData.FirstName"></span>
+
+        <label asp-for="UserData.LastName"></label>
+        <input asp-for="UserData.LastName" />
+        <span asp-validation-for="UserData.LastName"></span>
+
+        <label asp-for="UserData.Email"></label>
+        <input asp-for="UserData.Email" />
+        <span asp-validation-for="UserData.Email"></span>
+
+        <label asp-for="UserData.Password"></label>
+        <input asp-for="UserData.Password" />
+        <span asp-validation-for="UserData.Password"></span>
+
+        <label asp-for="UserData.ConfirmPassword"></label>
+        <input asp-for="UserData.ConfirmPassword" />
+        <span asp-validation-for="UserData.ConfirmPassword"></span>
+
+        <button type="submit">Register</button>
+
+    </form>
