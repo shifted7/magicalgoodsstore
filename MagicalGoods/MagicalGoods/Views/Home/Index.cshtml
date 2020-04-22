@@ -1,10 +1,21 @@
-﻿<!DocType html>
+﻿@model IEnumerable<MagicalGoods.Models.Product>
+<!DocType html>
 <html>
 <head>
     <title>Magical Goods</title>
 </head>
 <body>
     <h1>Welcome to Andrew and Ally's Alchemical Auguries</h1>
+    <h2>Our Magical Goods</h2>
+
+    @foreach (var product in Model)
+    {
+        <h3>@product.Name</h3>
+        <p>@product.Price Galleons</p>
+        <p>@product.Description</p>
+        <img src="@product.Image"/>
+    }
+
 </body>
 </html>
             
