@@ -11,10 +11,18 @@
 </head>
 <body>
 
-    if
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <form asp-page="/Account/Logout">
+            <button type="submit"> Logout </button>
+        </form>
+    }
+    else
+    {
+        <a asp-page="/Account/Login">Login</a>
+        <a asp-page="/Account/Register">Register</a>
+    }
 
-    <a asp-page="/Account/Login">Login</a>
-    <a asp-page="/Account/Register">Register</a>
 
     <div>
         @RenderBody()
