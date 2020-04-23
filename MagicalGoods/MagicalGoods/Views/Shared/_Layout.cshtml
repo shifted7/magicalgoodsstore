@@ -9,14 +9,15 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="~/StyleSheet.css" rel="stylesheet" />
-
-
 </head>
 <body>
 
     <nav class="navbar navbar-light bg-light navbar-expand-lg">
-            [Little Icon?]
+        <a class="nav-link" asp-page="/Home/Index">
+            PIC ICON TO GO HOME
+            @*<img src="#" alt="Alternate Text" />*@
+        </a>
+
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,6 +37,9 @@
                 }
                 else
                 {
+                    <li class="navbar-item">
+                        <a class="nav-link" asp-page="/Shop/Index">Shop</a>
+                    </li>
                     <li class="navbar-item">
                         <a class="nav-link" asp-page="/Account/Login">Login</a>
                     </li>

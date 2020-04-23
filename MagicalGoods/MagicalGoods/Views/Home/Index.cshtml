@@ -1,34 +1,24 @@
-﻿@model IEnumerable<MagicalGoods.Models.Product>
-
-@{ 
+﻿@{ 
     Layout = "_Layout";
 }
 <!DocType html>
 <html>
 <head>
     <title>Magical Goods</title>
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+
 </head>
+
 <body>
-    <h1 class="py-5 text-center">Welcome to Andrew and Ally's Alchemical Auguries</h1>
-    <h2 class="pb-5 text-center">Our Magical Goods</h2>
-
-    <section class=" col-lg-10 text-center row mx-auto">
-        @foreach (var product in Model)
-        {
-            <article class="col-md-4 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="@product.Image"/>
-                    <div class="card-body">
-                        <h3 class="pt-2 card-title">@product.Name</h3>
-                        <p class="card-text">@product.Price Galleons</p>
-                        <p class="card-text">@product.Description</p>
-                        <button class="btn btn-primary"type="submit">Add to Cart</button>
-                    </div>
-                </div>
-            </article>
-        }
-    </section>
-
+    <header>
+        <div id="curtain"></div>
+        <div class="intro">
+            <h1 class="headerText">Welcome to Andrew and Ally's Alchemical Auguries</h1>
+            <p class="headerText">Where you can get your Magical Goods!</p>
+        </div>
+    </header>
 </body>
 </html>
             
+
+
