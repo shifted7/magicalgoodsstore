@@ -7,18 +7,25 @@
 <html>
 <head>
     <title>Magical Goods</title>
+    <link href="~/StyleSheet.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>Welcome to Andrew and Ally's Alchemical Auguries</h1>
-    <h2>Our Magical Goods</h2>
+    <div class="col-lg-10 mx-auto text-center">
+        <h1 class="py-5">Welcome to Andrew and Ally's Alchemical Auguries</h1>
+        <h2 class="py-5">Our Magical Goods</h2>
 
-    @foreach (var product in Model)
-    {
-        <h3>@product.Name</h3>
-        <p>@product.Price Galleons</p>
-        <p>@product.Description</p>
-        <img src="@product.Image"/>
-    }
+        <section class="row">
+            @foreach (var product in Model)
+            {
+                <article class="col-md-4">
+                    <h3>@product.Name</h3>
+                    <p>@product.Price Galleons</p>
+                    <p>@product.Description</p>
+                    <img class="img-fluid" src="@product.Image" />
+                </article>
+            }
+        </section>
+    </div>
 
 </body>
 </html>
