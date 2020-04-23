@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using MagicalGoods.Models;
 using Microsoft.AspNetCore.Identity;
@@ -47,6 +48,8 @@ namespace MagicalGoods.Pages.Account
                 // If successed, this will sign in the user
                 if (result.Succeeded)
                 {
+                    Claim fullName = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+                    await _userManager.AddClaimAsync(user, fullName);
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
