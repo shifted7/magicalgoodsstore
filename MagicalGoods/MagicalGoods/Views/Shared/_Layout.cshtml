@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+
+
 </head>
 <body>
 
@@ -22,12 +25,12 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
 
-                    <span>You're a Wizard @User.Claims.First(x => x.Type == "FullName").Value!</span>
+                    <li class="pr-3 my-auto">You're a Wizard @User.Claims.First(x => x.Type == "FullName").Value!</li>
 
                     <li class="nav-item">
 
                         <form asp-page="/Account/Logout">
-                            <button class="btn btn-danger" type="submit"> Logout </button>
+                            <button class="btn btn-outline-dark" type="submit"> Logout </button>
                         </form>
                     </li>
                 }
