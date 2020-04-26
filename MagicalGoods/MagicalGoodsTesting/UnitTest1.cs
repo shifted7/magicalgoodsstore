@@ -208,6 +208,34 @@ namespace MagicalGoodsTests
             }
         }
 
-        //TODO Test Can Update Product
+        [Fact]
+        public async Task TestCanUpdateProductInDatabase()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+                .UseInMemoryDatabase("TestCanUpdateProductInDatabase")
+                .Options;
+
+            // open the connection to the database
+            using (StoreDbContext context = new StoreDbContext(options))
+            {
+                ProductService ps = new ProductService(context);
+                Product testProduct = new Product
+                {
+                    Name = "Test",
+                    Price = 10.00m,
+                    Description = "Test Description",
+                    Image = "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png"
+                };
+                await ps.CreateProductAsync(testProduct);
+
+                string updatedName = "Updated Name";
+                testProduct.Name = updatedName;
+
+                await ps.UpdateProductAsync(testProduct);
+                var result = await ps.GetProductByIdAsync(testProduct.ID);
+
+                Assert.Equal(updatedName, result.Name);
+            }
+        }
     }
 }
