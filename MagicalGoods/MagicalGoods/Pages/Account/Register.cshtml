@@ -5,30 +5,62 @@
     Layout = "_Layout";
 }
 
-<form method="post">
-    <div asp-validation-summary="All"></div>
-    <hr />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Register</title>
+    <link href="~/Login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row justify-content-center">
+        <form class="col-6 mx-auto" method="post">
+            <div asp-validation-summary="All"></div>
+            <hr />
+            <h1 class="align-center">Register</h1>
 
-    <label asp-for="UserData.FirstName"></label>
-    <input asp-for="UserData.FirstName" />
-    <span asp-validation-for="UserData.FirstName"></span>
+            <div class="form-group">
+                <label class="col-12 control-label" asp-for="UserData.FirstName">First Name</label>
+                <div class="col-12">
+                    <input class="form-control" placeholder="First Name" asp-for="UserData.FirstName" autofocus />
+                </div>
+                <span asp-validation-for="UserData.FirstName"></span>
+            </div>
 
-    <label asp-for="UserData.LastName"></label>
-    <input asp-for="UserData.LastName" />
-    <span asp-validation-for="UserData.LastName"></span>
+            <div class="form-group">
+                <label class="col-12 control-label" asp-for="UserData.LastName">Last Name</label>
+                <div class="col-12">
+                    <input class="form-control" placeholder="Last Name" asp-for="UserData.LastName" autofocus />
+                </div>
+                <span asp-validation-for="UserData.LastName"></span>
+            </div>
 
-    <label asp-for="UserData.Email"></label>
-    <input asp-for="UserData.Email" />
-    <span asp-validation-for="UserData.Email"></span>
+            <div class="form-group">
+                <label class="col-12 control-label" asp-for="UserData.Email">Email*</label>
+                <div class="col-12">
+                    <input class="form-control" placeholder="Email Address" asp-for="UserData.Email" autofocus />
+                </div>
+                <span asp-validation-for="UserData.Email"></span>
+            </div>
 
-    <label asp-for="UserData.Password"></label>
-    <input asp-for="UserData.Password" />
-    <span asp-validation-for="UserData.Password"></span>
+            <div class="form-group">
+                <label class="col-12 control-label" asp-for="UserData.Password">Password*</label>
+                <div class="col-12">
+                    <input class="form-control" placeholder="Password" asp-for="UserData.Password" autofocus />
+                </div>
+                <span asp-validation-for="UserData.Password"></span>
+            </div>
 
-    <label asp-for="UserData.ConfirmPassword"></label>
-    <input asp-for="UserData.ConfirmPassword" />
-    <span asp-validation-for="UserData.ConfirmPassword"></span>
+            <div class="form-group">
+                <label class="col-12 control-label" asp-for="UserData.ConfirmPassword">Confirm Password*</label>
+                <div class="col-12">
+                    <input class="form-control" placeholder="Confirm Password" asp-for="UserData.ConfirmPassword" autofocus />
+                </div>
+                <span asp-validation-for="UserData.ConfirmPassword"></span>
+            </div>
 
-    <button type="submit">Register</button>
+            <button class="btn btn-primary btn-large align-center" type="submit">Register</button>
 
-</form>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -60,7 +60,7 @@ namespace MagicalGoods
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
+        app.UseRouting();
             app.UseAuthentication();
             app.UseStaticFiles();
 
