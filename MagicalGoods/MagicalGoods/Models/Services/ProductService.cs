@@ -43,7 +43,7 @@ namespace MagicalGoods.Models.Services
 
         public async Task UpdateProductAsync(Product product)
         {
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Products.Update(product);
             await _context.SaveChangesAsync();
         }
     }
