@@ -51,7 +51,7 @@ namespace MagicalGoods.Pages.Account
                     Claim fullName = new Claim("FullName", $"{user.FirstName} {user.LastName}");
                     await _userManager.AddClaimAsync(user, fullName);
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToPage("/Shop/Index");
                 }
 
                 // loads the errors and sends to view page.

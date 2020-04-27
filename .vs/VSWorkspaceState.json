@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MagicalGoods",
+    "\\MagicalGoods\\MagicalGoods",
+    "\\MagicalGoods\\MagicalGoods\\wwwroot"
   ],
+  "SelectedNode": "\\MagicalGoods\\MagicalGoods\\wwwroot\\StyleSheet.css",
   "PreviewInSolutionExplorer": false
 }

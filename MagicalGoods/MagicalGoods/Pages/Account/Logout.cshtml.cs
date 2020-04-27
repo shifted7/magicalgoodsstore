@@ -27,7 +27,7 @@ namespace MagicalGoods.Pages.Account
         public async Task<IActionResult> OnPost()
         {
             await _signIn.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToPage("/Index");
         }
     }
 }
