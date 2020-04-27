@@ -60,14 +60,14 @@ namespace MagicalGoods
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
+        app.UseRouting();
             app.UseAuthentication();
             app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

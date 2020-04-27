@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicalGoods", "MagicalGoods\MagicalGoods.csproj", "{1EC2378C-82C3-44E4-88D6-01693CE11BE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicalGoodsTesting", "MagicalGoodsTesting\MagicalGoodsTesting.csproj", "{959D67A8-8F28-4EA4-A810-B8A8595201B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicalGoodsTesting", "MagicalGoodsTesting\MagicalGoodsTesting.csproj", "{959D67A8-8F28-4EA4-A810-B8A8595201B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

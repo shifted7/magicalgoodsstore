@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using MagicalGoods.Models;
 using Microsoft.AspNetCore.Identity;
@@ -18,6 +19,11 @@ namespace MagicalGoods.Pages.Account
         [BindProperty]
         public RegisterInput UserData { get; set; }
 
+        /// <summary>
+        /// Brings in the appropriate user and sign-in manager when the page is created. User and Sign-in managers are part of the ASP.NET Core Identity package.
+        /// </summary>
+        /// <param name="usermanager">The appropriate user manager to bring in during page creation.</param>
+        /// <param name="signIn">The appropriate signin manager to bring in during page creation.</param>
         public RegisterModel(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signIn)
         {
             _userManager = usermanager;
@@ -28,6 +34,10 @@ namespace MagicalGoods.Pages.Account
         {
         }
 
+        /// <summary>
+        /// Checks for valid inputs for a new account, and reloads the page with errors showing when appropriate. If registration succeeds, signs in the user and redirects to the shop page.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPost()
         {
             // creates new user if model state valid
@@ -47,8 +57,10 @@ namespace MagicalGoods.Pages.Account
                 // If successed, this will sign in the user
                 if (result.Succeeded)
                 {
+                    Claim fullName = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+                    await _userManager.AddClaimAsync(user, fullName);
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToPage("/Shop/Index");
                 }
 
                 // loads the errors and sends to view page.

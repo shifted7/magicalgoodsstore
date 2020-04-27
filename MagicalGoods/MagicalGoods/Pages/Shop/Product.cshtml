@@ -1,0 +1,23 @@
+﻿@page "{id:int}"
+@model MagicalGoods.Pages.Shop.ProductModel
+@{
+    Layout = "_Layout";
+}
+
+<section>
+    <article class="d-flex justify-content-center">   
+        <div class="row mt-5 p-5">
+            <div class="col-4 p-2">
+                <img class="img-fluid" src="@Model.CurrentProduct.Image" />
+            </div>
+            <div class="col-8 p-2">
+                <h2>@Model.CurrentProduct.Name</h2>
+                <p>@Model.CurrentProduct.Description</p>
+                <h5>@Model.CurrentProduct.Price Galleons</h5>
+                <a class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+        
+
+    </article>
+</section>
