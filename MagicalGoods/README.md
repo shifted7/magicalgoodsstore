@@ -8,8 +8,7 @@ Deployed: https://magicalgoodsstore.azurewebsites.net/
 
 ---
 ## Web Application
-Our E-Commerce C# web application allows users to look through and purchase magical items. On our register page, we are grabbing our claims for our first name and last name to used to display it across our pages as well as having better security. 
-
+Our E-Commerce C# web application allows users to look through and purchase magical items. On our register page, using Identity, we are grabbing our claims for our first name and last name to used to display it across our pages as well as having better security. 
 
 ---
 
@@ -23,17 +22,11 @@ Microsoft Visual Studio Community 2019
 - xUnit
 - Bootstrap
 - Azure
+- Identity
 
+<!--
 ---
-
-## Recent Updates
-
-#### V 1.4
-*Added OAuth for MySpace* - 23 Jan 2003
-
----
-
-## Getting Started
+<## Getting Started
 
 Clone this repository to your local machine.
 
@@ -110,25 +103,21 @@ Unit testing is included in the AmandaFE/FrontendTesting project using the xUnit
 | ID  | int | YES |
 | Name/Author | string | YES |
 | Posts | list | YES |
+-->
 
 ---
 
-## Change Log
-***[The change log will list any changes made to the code base. This includes any changes from TA/Instructor feedback]***  
-1.4: *Added OAuth for MySpace* - 23 Jan 2003  
-1.3: *Changed email handler to Alta Vista, fixed issue with styling on Netscape Navigator browser.* - 21 Dec 1999  
-1.2: *Fixed bug where pages would not load due to temp data* - 16 Jun 1998  
-1.1: *Added ability for user to change photos on a post* - 12 May 1998  
+## Change Log  
+1.7: *Added some CSS for all pages* - 26 April 2020  
+1.6: *When user clicks on an item from the shop page, they are redirected to see a page with the details of the clicked product* - 23 April 2020  
+1.5: *When user clicks on an item from the shop page, they are redirected to see a page with the details of the clicked product* - 23 April 2020  
+1.4: *Created a logout page. When user logs in, they are redirected to the shop page to see a list of all products* - 22 April 2020  
+1.3: *Created interface/service for CRUD for our products, seeded the database* - 21 April 2020  
+1.2: *Added a register and login page* - 21 April 2020  
+1.1: *Scaffolded basic structure for application* - 20 April 2020  
 
 ---
 
 ## Authors
-Albus Dumbbledore
-Igor Karkaroff
-Minerva McGonagall
-Leta Lestrange
-Gellert Grindelwald
-
----
-
-For more information on Markdown: https://www.markdownguide.org/cheat-sheet
+Andrew Casper  
+Allyson Reyes
