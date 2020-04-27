@@ -9,36 +9,30 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="~/Login.css" rel="stylesheet" />
 </head>
-<body>
-
-    <div class="container">
-        <form method="post">
+<body class="text-center">
+    <div class="align-items-center">
+        <form class="form-signin col-sm-4 mx-auto" method="post">
+            <img class="mb-4" height="50" src="~/img/Store-logo-transparent.png" alt="Logo" />
+            <h1 class="h3 mb-3 font-weight-normal">SIGN IN</h1>
             <div asp-validation-summary="All"></div>
-
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label" asp-for="Input.Email"></label>
-                <div class="col-sm-9">
-                    <input class="form-control" asp-for="Input.Email" />
-                </div>
+            <div class="form-label-group">
+                <label class="sr-only" asp-for="Input.Email"></label>
+                <input class="form-control" placeholder="Email" asp-for="Input.Email" required autofocus />
                 <span asp-validation-for="Input.Email"></span>
             </div>
+            <div class="form-label-group">
+                <label class="sr-only" asp-for="Input.Password"></label>
+                <input class="form-control" placeholder="Password" asp-for="Input.Password" />
+                <span asp-validation-for="Input.Password"></span>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label" asp-for="Input.Password"></label>
-                <div class="col-sm-9">
-                    <input class="form-control" asp-for="Input.Password" />
-                    <span asp-validation-for="Input.Password"></span>
-                </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-9 offset-sm-3">
-                     <button class="btn btn-primary" type="submit">LOG IN</button>
-                </div>
-            </div>
-        </form>
+    <button class="btn btn-primary btn-large btn-block" type="submit">SIGN IN</button>
+    </form>
     </div>
+
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
