@@ -12,11 +12,18 @@ namespace MagicalGoods.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        /// <summary>
+        /// uses dependency injection to bring in the signinmanager library from Identity
+        /// </summary>
         private SignInManager<ApplicationUser> _signIn;
 
         [BindProperty]
         public LoginViewModel Input { get; set; }
 
+        /// <summary>
+        /// brings in the application model into the signinmanager library 
+        /// </summary>
+        /// <param name="signIn"></param>
         public LoginModel(SignInManager<ApplicationUser> signIn)
         {
             _signIn = signIn;
@@ -26,6 +33,10 @@ namespace MagicalGoods.Pages.Account
         {
         }
 
+        /// <summary>
+        /// When user tries to login, this method uses the SignInManger to help the user sign in, if it succeeds, the user will be redirected to the home page, if not, there will be an error the user will see that there was an "invalid login attempt"
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPost()
         {
 
@@ -46,6 +57,9 @@ namespace MagicalGoods.Pages.Account
             return Page();
         }
 
+        /// <summary>
+        /// properties needed for the login page, just need the email and the password
+        /// </summary>
         public class LoginViewModel
         {
             [Required]
