@@ -35,7 +35,7 @@ namespace MagicalGoods.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToPage("/Shop/Index");
                 }
                 else
                 {
