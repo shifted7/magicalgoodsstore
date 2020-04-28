@@ -20,6 +20,8 @@
     <Compile Include="Migrations\StoreDb\20200422012258_Initial.Designer.cs" />
     <Compile Include="Migrations\StoreDb\20200422035030_TenProducts.cs" />
     <Compile Include="Migrations\StoreDb\20200422035030_TenProducts.Designer.cs" />
+    <Compile Include="Migrations\StoreDb\20200428224915_updatedCartProductKey.cs" />
+    <Compile Include="Migrations\StoreDb\20200428224915_updatedCartProductKey.Designer.cs" />
     <Compile Include="Migrations\StoreDb\StoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 

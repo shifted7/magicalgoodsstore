@@ -15,7 +15,7 @@ namespace MagicalGoods.Models.Services
         {
             _storeContext = storeContext;
         }
-        public async Task<Cart> AddCartToUser(int userId)
+        public async Task<Cart> AddCartToUser(string userId)
         {
             Cart cart = new Cart()
             {
