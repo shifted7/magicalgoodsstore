@@ -10,6 +10,7 @@ Deployed: https://magicalgoodsstore.azurewebsites.net/
 ## Web Application
 Our E-Commerce C# web application allows users to look through and purchase magical items. On our register page, using Identity, we are grabbing our claims for our first name and last name to used to display it across our pages as well as having better security. 
 
+Claims: first and last name.
 ---
 
 ## Tools Used
