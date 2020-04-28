@@ -237,5 +237,74 @@ namespace MagicalGoodsTests
                 Assert.Equal(updatedName, result.Name);
             }
         }
+
+
+        [Fact]
+        public void CanCreateEmptyCart()
+        {
+            Cart cart = new Cart();
+            Assert.Equal(0, cart.UserId);
+        }
+
+        [Fact]
+        public async void CanAddCartToUser()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+            .UseInMemoryDatabase("CanAddCartToUserTest")
+            .Options;
+
+            using(StoreDbContext cartContext = new StoreDbContext(options))
+            {
+                CartService cs = new CartService(cartContext);
+
+                Cart addedCart = await cs.AddCartToUser(1);
+
+                var result = await cs.GetCartByID(addedCart.ID);
+
+                Assert.Equal(1, result.UserId);
+            };
+        }
+
+        [Fact]
+        public async void CanAddProductToCart()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+            .UseInMemoryDatabase("CanAddProductToCartTest")
+            .Options;
+
+            using (StoreDbContext storeContext = new StoreDbContext(options))
+            {
+                CartProductService cps = new CartProductService(storeContext);
+
+                CartProduct cartProduct = await cps.AddProductToCart(3, 7, 2);
+
+                List<CartProduct> result = await cps.GetAllProductsForCart(7);
+                Assert.Single(result);
+            };
+        }
+
+        //[Fact]
+        //public async void CanRemoveProduct()
+        //{
+        //    DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+        //    .UseInMemoryDatabase("CanRemoveProductTest")
+        //    .Options;
+
+        //    using (StoreDbContext storeContext = new StoreDbContext(options))
+        //    {
+        //        CartProductService cps = new CartProductService(storeContext);
+
+        //        CartProduct cartProduct = await cps.AddProductToCart(2, 4, 1);
+
+        //        await cps.RemoveProduct(2, 4);
+
+        //        var result = await cps.GetAllProductsForCart(2);
+
+        //        Assert.Empty(result);
+        //    };
+
+        //}
+
+
     }
 }

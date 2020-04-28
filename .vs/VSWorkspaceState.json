@@ -3,8 +3,9 @@
     "",
     "\\MagicalGoods",
     "\\MagicalGoods\\MagicalGoods",
-    "\\MagicalGoods\\MagicalGoods\\wwwroot"
+    "\\MagicalGoods\\MagicalGoods\\Pages\\Account",
+    "\\MagicalGoods\\MagicalGoods\\Pages\\Shop"
   ],
-  "SelectedNode": "\\MagicalGoods\\MagicalGoods\\wwwroot\\StyleSheet.css",
+  "SelectedNode": "\\MagicalGoods\\.gitignore",
   "PreviewInSolutionExplorer": false
 }

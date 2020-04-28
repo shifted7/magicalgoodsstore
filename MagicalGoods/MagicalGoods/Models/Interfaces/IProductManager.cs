@@ -14,6 +14,7 @@ namespace MagicalGoods.Models.Interfaces
 
         //Read
         Task<Product> GetProductByIdAsync(int productId);
+
         Task<List<Product>> GetAllProductsAsync();
 
         //Update
