@@ -48,7 +48,7 @@ namespace MagicalGoods.Pages.Order
                 sb.AppendLine($"<p>Quantity: {cartProduct.Quantity}</p>");
                 sb.AppendLine($"<p>Price: {cartProduct.Product.Price * cartProduct.Quantity}</p>");
             }
-                sb.AppendLine($"<a href='https://magicalgoodsstore.azurewebsites.net/'>Shop Some more!</a>");
+            sb.AppendLine($"<a href='https://magicalgoodsstore.azurewebsites.net/'>Shop Some more!</a>");
 
             string email = _userManager.GetUserName(User);
 
