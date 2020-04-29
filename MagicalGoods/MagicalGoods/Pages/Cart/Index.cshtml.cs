@@ -35,16 +35,5 @@ namespace MagicalGoods.Pages.Cart
                 return RedirectToPage("/Account/Login");
             }
         }
-
-        public async Task<IActionResult> OnPostUpdate(int cartProductId, int quantity)
-        {
-            await _cartProductService.UpdateProductQuantity(cartProductId, quantity);
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostRemove()
-        {
-            return Page();
-        }
     }
 }

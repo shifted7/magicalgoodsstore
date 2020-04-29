@@ -6,29 +6,31 @@
 
 <h1 class="text-center">My Cart</h1>
 
-@foreach(var cartProduct in Model.UserCartProducts)
+@foreach (var cartProduct in Model.UserCartProducts)
 {
-<form method="post">
-    <div class="row justify-content-center align-items-center p-2">
-        <div class="col-md-2">
-            <a asp-page="/Shop/Product" asp-route-id="@cartProduct.ProductID">
-                <img class="img-fluid" src="@cartProduct.Product.Image" />
-            </a>
-        </div>
+    <form method="post">
+        <div class="row justify-content-center align-items-center p-2">
+            <div class="col-md-2">
+                <a asp-page="/Shop/Product" asp-route-id="@cartProduct.ProductID">
+                    <img class="img-fluid" src="@cartProduct.Product.Image" />
+                </a>
+            </div>
 
-        <div class="col-md-4">
-            <a asp-page="/Shop/Product" asp-route-id="@cartProduct.ProductID">
-                <h4>@cartProduct.Product.Name</h4>
-            </a>
-            <label>QTY: </label>
-            <input name="quantity" value="@cartProduct.Quantity" />
-            <p>Price: @(cartProduct.Product.Price * cartProduct.Quantity) Galleons</p>
+            <div class="col-md-4">
+                <a asp-page="/Shop/Product" asp-route-id="@cartProduct.ProductID">
+                    <h4>@cartProduct.Product.Name</h4>
+                </a>
+                <label>QTY: </label>
+                <input value="@cartProduct.Quantity" asp-for="@cartProduct.Quantity" />
+                <p>Price: @(cartProduct.Product.Price * cartProduct.Quantity) Galleons</p>
+            </div>
+            <div class="col-md-3">
+                <input asp-for="@cartProduct.ID" value="@cartProduct.ID" hidden/>
+                <button asp-page="/Cart/Update" class="btn btn-primary m-4">Update</button>
+                <button asp-page="/Cart/Remove" class="btn btn-primary m-4">Remove</button>
+            </div>
         </div>
-        <div class="col-md-3">
-            <button asp-page-handler="Update" class="btn btn-primary m-4">Update</button>
-            <button asp-page-handler="Remove" class="btn btn-primary m-4">Remove</button>
-        </div>
-    </div>
-</form>
+    </form>
 }
 <button class="btn btn-primary">Checkout</button>
+
