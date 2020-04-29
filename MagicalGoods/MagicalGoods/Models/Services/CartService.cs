@@ -21,13 +21,14 @@ namespace MagicalGoods.Models.Services
             {
                 UserId = userId
             };
-            await _storeContext.AddAsync(cart);
+            _storeContext.Carts.Add(cart);
+            await _storeContext.SaveChangesAsync();
             return cart;
         }
 
-        public async Task<Cart> GetCartByID(int id)
+        public Cart GetCartByUserID(string userId)
         {
-            var result = await _storeContext.Carts.FindAsync(id);
+            var result = _storeContext.Carts.FirstOrDefault(entry => entry.UserId == userId);
             return result;
         }
     }

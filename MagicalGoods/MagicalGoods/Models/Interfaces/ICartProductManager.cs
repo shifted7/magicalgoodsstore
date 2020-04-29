@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MagicalGoods.Models.Interfaces
 {
-    interface ICartProductManager
+    public interface ICartProductManager
     {
         //Gets
         public Task<List<CartProduct>> GetAllProductsForCart(string userId);

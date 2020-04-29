@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace MagicalGoods.Models.Interfaces
 {
-    interface ICartManager
+    public interface ICartManager
     {
         public Task<Cart> AddCartToUser(string userId);
-        public Task<Cart> GetCartByID(int id);
+        public Cart GetCartByUserID(string userId);
 
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MagicalGoods.Models;
 using MagicalGoods.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -15,9 +16,16 @@ namespace MagicalGoods.Pages.Shop
         // uses dependency injection to use a method from the IProductManager Interface
         private IProductManager _productService { get; set; }
 
-        public ProductModel(IProductManager productService)
+        private UserManager<ApplicationUser> _userManager;
+        private ICartProductManager _cartProductService;
+        private ICartManager _cartService;
+
+        public ProductModel(IProductManager productService, UserManager<ApplicationUser> userManager, ICartProductManager cartProductService, ICartManager cartService)
         {
             _productService = productService;
+            _userManager = userManager;
+            _cartProductService = cartProductService;
+            _cartService = cartService;
         }
 
         public Product CurrentProduct { get; set; }
@@ -28,6 +36,20 @@ namespace MagicalGoods.Pages.Shop
             var result = await _productService.GetProductByIdAsync(id);
             CurrentProduct = result;
             return Page();
+        }
+
+        public async Task<IActionResult> OnPost(int productId)
+        {
+            string userId = _userManager.GetUserId(User);
+            int cartId = _cartService.GetCartByUserID(userId).ID;
+            CartProduct cartProduct = new CartProduct()
+            {
+                CartID = cartId,
+                ProductID = productId,
+                Quantity = 1
+            };
+            await _cartProductService.AddProductToCart(cartProduct);
+            return RedirectToPage("/Cart/Index");
         }
     }
 }

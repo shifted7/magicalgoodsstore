@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MagicalGoods.Migrations
 {
-    public partial class Initial : Migration
+    public partial class reset2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

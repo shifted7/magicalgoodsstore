@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MagicalGoods.Models;
+using MagicalGoods.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,6 +16,7 @@ namespace MagicalGoods.Pages.Account
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private ICartManager _cartService;
 
         [BindProperty]
         public RegisterInput UserData { get; set; }
@@ -24,10 +26,11 @@ namespace MagicalGoods.Pages.Account
         /// </summary>
         /// <param name="usermanager">The appropriate user manager to bring in during page creation.</param>
         /// <param name="signIn">The appropriate signin manager to bring in during page creation.</param>
-        public RegisterModel(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signIn)
+        public RegisterModel(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signIn, ICartManager cartService)
         {
             _userManager = usermanager;
             _signInManager = signIn;
+            _cartService = cartService;
         }
 
         public void OnGet()
@@ -60,6 +63,7 @@ namespace MagicalGoods.Pages.Account
                     Claim fullName = new Claim("FullName", $"{user.FirstName} {user.LastName}");
                     await _userManager.AddClaimAsync(user, fullName);
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _cartService.AddCartToUser(user.Id);
                     return RedirectToPage("/Shop/Index");
                 }
 
