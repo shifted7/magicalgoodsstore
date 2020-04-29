@@ -34,6 +34,8 @@ namespace MagicalGoods
             services.AddRazorPages();
 
             services.AddTransient<IProductManager, ProductService>();
+            services.AddTransient<ICartManager, CartService>();
+            services.AddTransient<ICartProductManager, CartProductService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {

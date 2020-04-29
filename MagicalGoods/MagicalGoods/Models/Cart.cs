@@ -8,6 +8,8 @@ namespace MagicalGoods.Models
     public class Cart
     {
         public int ID { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
+
+        public List<CartProduct> CartProducts { get; set; }
     }
 }

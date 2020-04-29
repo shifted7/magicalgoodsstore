@@ -16,13 +16,6 @@ namespace MagicalGoods.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            modelBuilder.Entity<CartProduct>().HasKey(c => new
-            {
-                c.CartID,
-                c.ProductID
-            });
-
             modelBuilder.Entity<Product>().HasData(
                     new Product
                     {

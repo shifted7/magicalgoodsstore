@@ -5,18 +5,20 @@ using System.Threading.Tasks;
 
 namespace MagicalGoods.Models.Interfaces
 {
-    interface ICartProductManager
+    public interface ICartProductManager
     {
-        //Get
-        public Task<List<CartProduct>> GetAllProductsForCart(int cartId);
+        //Gets
+        public Task<List<CartProduct>> GetAllProductsForCart(string userId);
+        public Task<CartProduct> GetCartProductById(int cartProductId);
 
-        //public List<CartProduct> GetCartProductByIds(int cartId, int productId);
         //add
-        public Task<CartProduct> AddProductToCart(int productId, int cartId, int productQuantity);
+        public Task AddProductToCart(CartProduct cartProduct);
+
         //update quant
-        public Task<int> UpdateProductQuantity(int productId, int cartId, int productQuantity);
+        public Task<int> UpdateProductQuantity(int cartProductId, int newQuantity);
+
         //remove
-        public Task RemoveProduct(int productId, int cartId);
+        public Task RemoveProduct(int cartProductId);
 
     }
 }

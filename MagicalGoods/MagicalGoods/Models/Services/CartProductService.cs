@@ -16,63 +16,43 @@ namespace MagicalGoods.Models.Services
         {
             _storeContext = storeContext;
         }
-        public async Task<CartProduct> AddProductToCart(int productId, int cartId, int productQuantity)
+        public async Task AddProductToCart(CartProduct cartProduct)
         {
-            CartProduct cartProduct = new CartProduct()
-            {
-                CartID = cartId,
-                ProductID = productId,
-                Quantity = productQuantity
-            };
-
-            await _storeContext.CartProducts.AddAsync(cartProduct);
+            _storeContext.Add(cartProduct);
             await _storeContext.SaveChangesAsync();
-
-            return cartProduct;
         }
 
-        public async Task<List<CartProduct>> GetAllProductsForCart(int cartId)
+        public async Task<List<CartProduct>> GetAllProductsForCart(string userId)
         {
-            var result = await _storeContext.CartProducts.Where(x => x.CartID == cartId).ToListAsync();
-                                                         
+            var userCart = await _storeContext.Carts.FirstOrDefaultAsync(entry => entry.UserId == userId);
+            var cartProducts = await _storeContext.CartProducts
+                .Where(cartProduct => cartProduct.CartID == userCart.ID)
+                .Include(cartProduct => cartProduct.Product)
+                .ToListAsync();                                 
+            return cartProducts;
+        }
+
+        public async Task<CartProduct> GetCartProductById(int cartProductId)
+        {
+            var result = await _storeContext.CartProducts.FindAsync(cartProductId);
             return result;
         }
 
-        //public List<CartProduct> GetCartProductByIds(int cartId, int productId)
-        //{
-        //    var result = _storeContext.CartProducts.Where(x => x.CartID == cartId && x.ProductID == productId).Select(x => new CartProduct()
-        //    {
-        //        CartID = cartId,
-        //        ProductID = productId
-        //    }).ToList();
-
-        //    return result;
-        //}
-
-        public async Task RemoveProduct(int productId, int cartId)
+        public async Task RemoveProduct(int cartProductId)
         {
-            CartProduct cartProduct = new CartProduct()
-            {
-                ProductID = productId,
-                CartID = cartId
-            };
-
-            _storeContext.Remove(cartProduct);
+            CartProduct cartProductToDelete = await _storeContext.CartProducts.FindAsync(cartProductId);
+            _storeContext.Remove(cartProductToDelete);
             await _storeContext.SaveChangesAsync();
         }
 
-        public async Task<int> UpdateProductQuantity(int productId, int cartId, int productQuantity)
+        public async Task<int> UpdateProductQuantity(int cartProductId, int newQuantity)
         {
-            CartProduct cartProduct = new CartProduct()
-            {
-                ProductID = productId,
-                CartID = cartId,
-                Quantity = productQuantity
-            };
 
-            _storeContext.Update(cartProduct);
+            CartProduct cartProductToUpdate = await _storeContext.CartProducts.FindAsync(cartProductId);
+            cartProductToUpdate.Quantity = newQuantity;
+            _storeContext.Update(cartProductToUpdate);
             await _storeContext.SaveChangesAsync();
-            return cartProduct.Quantity;
+            return cartProductToUpdate.Quantity;
         }
     }
 }

@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using MagicalGoods.Models;
+using MagicalGoods.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
+
+namespace MagicalGoods.Pages.Cart
+{
+    public class IndexModel : PageModel
+    {
+        private UserManager<ApplicationUser> _userManager;
+        private ICartManager _cartService;
+        private ICartProductManager _cartProductService;
+        public List<CartProduct> UserCartProducts { get; set; }
+        public IndexModel(UserManager<ApplicationUser> userManager, ICartManager cartService, ICartProductManager cartProductService)
+        {
+            _userManager = userManager;
+            _cartService = cartService;
+            _cartProductService = cartProductService;
+        }
+        public async Task<IActionResult> OnGet()
+        {
+            string userId = _userManager.GetUserId(User);
+            if (userId.Length > 0)
+            {
+                UserCartProducts = await _cartProductService.GetAllProductsForCart(userId);
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("/Account/Login");
+            }
+        }
+
+        public async Task<IActionResult> OnPostUpdate(int cartProductId, int quantity)
+        {
+            await _cartProductService.UpdateProductQuantity(cartProductId, quantity);
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostRemove()
+        {
+            return Page();
+        }
+    }
+}
