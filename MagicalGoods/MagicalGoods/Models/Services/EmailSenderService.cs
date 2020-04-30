@@ -24,7 +24,7 @@ namespace MagicalGoods.Models.Services
             SendGridClient client = new SendGridClient(_configuration["SendGridKey"]);
             SendGridMessage msg = new SendGridMessage();
 
-            msg.SetFrom("order-status@magicalgoods.com", "Andrew and Ally");
+            msg.SetFrom("no-reply@magicalgoods.com", "Andrew and Ally");
             msg.AddTo(email);
             msg.SetSubject(subject);
             msg.AddContent(MimeType.Html, htmlMessage);
