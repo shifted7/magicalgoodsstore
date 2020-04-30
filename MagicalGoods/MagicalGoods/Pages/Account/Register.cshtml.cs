@@ -61,6 +61,8 @@ namespace MagicalGoods.Pages.Account
                 if (result.Succeeded)
                 {
                     Claim fullName = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+                    Claim id = new Claim("ID", user.Id);
+                    await _userManager.AddClaimAsync(user, id);
                     await _userManager.AddClaimAsync(user, fullName);
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     await _cartService.AddCartToUser(user.Id);

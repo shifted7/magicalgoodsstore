@@ -16,6 +16,8 @@ namespace MagicalGoods.Pages.Cart
         private ICartManager _cartService;
         private ICartProductManager _cartProductService;
         public List<CartProduct> UserCartProducts { get; set; }
+        public decimal Total { get; set; }
+
         public IndexModel(UserManager<ApplicationUser> userManager, ICartManager cartService, ICartProductManager cartProductService)
         {
             _userManager = userManager;
@@ -28,6 +30,11 @@ namespace MagicalGoods.Pages.Cart
             if (userId.Length > 0)
             {
                 UserCartProducts = await _cartProductService.GetAllProductsForCart(userId);
+
+                foreach (var cartProduct in UserCartProducts)
+                {
+                    Total += cartProduct.Product.Price * cartProduct.Quantity;
+                }
                 return Page();
             }
             else
