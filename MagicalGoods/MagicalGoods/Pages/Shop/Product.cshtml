@@ -4,8 +4,10 @@
     Layout = "_Layout";
 }
 
+@await Component.InvokeAsync("Basket", @Model.UserId)
+
 <section>
-    <article class="d-flex justify-content-center">   
+    <article class="d-flex justify-content-center">
         <div class="row mt-5 p-5">
             <div class="col-4 p-2">
                 <img class="img-fluid" src="@Model.CurrentProduct.Image" />
@@ -19,7 +21,8 @@
                 </form>
             </div>
         </div>
-        
+
 
     </article>
 </section>
+

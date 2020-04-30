@@ -13,6 +13,10 @@
 
     <h2 class="pb-5 text-center">Our Magical Goods</h2>
 
+    <section class="d-flex justify-content-end">
+        @await Component.InvokeAsync("Basket", @Model.UserId)
+    </section>
+
     <section class=" col-lg-10 text-center row mx-auto">
         @foreach (var product in Model.Products)
         {
@@ -29,6 +33,7 @@
             </article>
         }
     </section>
+
 
 </body>
 </html>
