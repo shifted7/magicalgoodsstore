@@ -53,7 +53,7 @@ namespace MagicalGoods.Pages.Order
             string email = _userManager.GetUserName(User);
 
             await _emailSender.SendEmailAsync(email, "Receipt", sb.ToString());
-            return RedirectToPage("/Shop/Index");
+            return RedirectToPage("/Checkout/Receipt");
         }
     }
 }
