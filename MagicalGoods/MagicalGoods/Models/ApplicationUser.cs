@@ -12,4 +12,11 @@ namespace MagicalGoods.Models
         public string LastName { get; set; }
         //public DateTime Birthdate { get; set; }
     }
+
+    public static class ApplicationRoles
+    {
+        public const string Admin = "Admin";
+        public const string Customer = "Customer";
+        public const string Vendor = "Vendor";
+    }
 }

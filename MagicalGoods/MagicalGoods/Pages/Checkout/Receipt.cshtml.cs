@@ -2,22 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using MagicalGoods.Models;
 using MagicalGoods.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MagicalGoods.Pages.Cart
+namespace MagicalGoods.Pages.Checkout
 {
-    public class IndexModel : PageModel
+    public class ReceiptModel : PageModel
     {
         private UserManager<ApplicationUser> _userManager;
         private ICartProductManager _cartProductService;
-        public List<CartProduct> UserCartProducts { get; set; }
+        public List<CartProduct> CheckoutCartProducts { get; set; }
         public decimal Total { get; set; }
 
-        public IndexModel(UserManager<ApplicationUser> userManager, ICartProductManager cartProductService)
+        public ReceiptModel(UserManager<ApplicationUser> userManager, ICartProductManager cartProductService)
         {
             _userManager = userManager;
             _cartProductService = cartProductService;
@@ -27,11 +27,11 @@ namespace MagicalGoods.Pages.Cart
             string userId = _userManager.GetUserId(User);
             if (userId.Length > 0)
             {
-                UserCartProducts = await _cartProductService.GetAllProductsForCart(userId);
+                CheckoutCartProducts = await _cartProductService.GetAllProductsForCart(userId);
 
-                foreach (var cartProduct in UserCartProducts)
+                foreach (var cartProduct in CheckoutCartProducts)
                 {
-                    Total = Total + cartProduct.Product.Price * cartProduct.Quantity;
+                    Total += cartProduct.Product.Price * cartProduct.Quantity;
                 }
                 return Page();
             }

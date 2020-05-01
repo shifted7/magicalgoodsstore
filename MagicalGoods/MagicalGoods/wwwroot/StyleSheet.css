@@ -26,12 +26,8 @@ body {
     justify-content: center;
     align-items: center;
     padding: 25px;
-    /*transparent purple*/
-    /*background-color: rgba(128,57,170,0.75);*/
-    background-color: rgba(128, 128, 128, 0.75);
-    background-color: rgba(0, 0, 0, 0.5);
-    background-color: rgba(139, 69, 19, 0.5);
-    background-color: rgba(41, 21, 3, 0.55);
+    background-color: rgba(0, 0, 0, 0.5); /*Black*/
+    /*background-color: rgba(41, 21, 3, 0.55);*/ /*Chocolate Brown*/
     border-radius: 25px;
     border: 5px double ivory;
     font-family: 'Fondamento', cursive;
