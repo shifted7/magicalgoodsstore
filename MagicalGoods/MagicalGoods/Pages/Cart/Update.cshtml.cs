@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MagicalGoods.Models;
 using MagicalGoods.Models.Interfaces;
@@ -15,7 +13,7 @@ namespace MagicalGoods.Pages.Cart
         private readonly ICartProductManager _cartProduct;
 
         [BindProperty]
-        public CartProduct cartProduct { get; set; }
+        public CartProduct CartProduct { get; set; }
 
         public UpdateModel(ICartProductManager cartProduct)
         {
@@ -28,7 +26,7 @@ namespace MagicalGoods.Pages.Cart
 
         public async Task<IActionResult> OnPost()
         {
-            await _cartProduct.UpdateProductQuantity(cartProduct.ID, cartProduct.Quantity);
+            await _cartProduct.UpdateProductQuantity(CartProduct.ID, CartProduct.Quantity);
             return RedirectToPage("/Cart/Index");
         }
     }

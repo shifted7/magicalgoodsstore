@@ -24,6 +24,10 @@ namespace MagicalGoods.Models.Services
 
         public async Task<List<CartProduct>> GetAllProductsForCart(string userId)
         {
+            if (userId == null)
+            {
+                return null;
+            }
             var userCart = await _storeContext.Carts.FirstOrDefaultAsync(entry => entry.UserId == userId);
             var cartProducts = await _storeContext.CartProducts
                 .Where(cartProduct => cartProduct.CartID == userCart.ID)

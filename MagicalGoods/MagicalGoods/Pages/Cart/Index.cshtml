@@ -17,7 +17,6 @@
 
     @foreach (var cartProduct in Model.UserCartProducts)
     {
-
         <form method="post">
             <div class="row justify-content-center align-items-center p-2">
                 <div class="col-md-2">
@@ -37,7 +36,7 @@
                 </div>
                 <div class="col-md-3">
                     <input asp-for="@cartProduct.ID" value="@cartProduct.ID" hidden />
-                    <button asp-page="/Cart/Update" class="btn btn-primary m-3">Update</button>
+                    <button asp-page="/Cart/Update" class="btn btn-primary m-3">Update Quantity</button>
                     <button asp-page="/Cart/Remove" class="btn btn-primary m-3">Remove</button>
                 </div>
             </div>

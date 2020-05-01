@@ -2,6 +2,8 @@
 @{
     decimal total = 0m;
 }
+
+@if(Model!=null){
 <head>
     @*<link href="~/BasketOverlay.css" rel="stylesheet" />*@
 </head>
@@ -19,7 +21,8 @@
 
         <p>Total Price: @total Galleons</p>
         <a class="btn btn-success" asp-page="/Cart/Index">View your cart</a>
-        
+
     </section>
 
 </div>
+}
