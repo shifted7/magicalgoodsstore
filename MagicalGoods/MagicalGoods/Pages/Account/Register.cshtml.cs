@@ -61,15 +61,17 @@ namespace MagicalGoods.Pages.Account
                 //grabs the user and creates the account using Identity
                 var result = await _userManager.CreateAsync(user, UserData.Password);
 
-                // If successed, this will sign in the user
+                // If successful, this will add claims and roles to the user, and sign them in
                 if (result.Succeeded)
                 {
                     Claim fullName = new Claim("FullName", $"{user.FirstName} {user.LastName}");
                     Claim id = new Claim("ID", user.Id);
                     await _userManager.AddClaimAsync(user, id);
                     await _userManager.AddClaimAsync(user, fullName);
+                    await AssignRolesToUser(user);
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    await _signInManager.AddToRoleAsync(user, ApplicationRoles.Customer);
+
                     await _cartService.AddCartToUser(user.Id);
                     
                     string emailHTMLMessage = ComposeAccountWelcomeEmail(user);
@@ -94,6 +96,26 @@ namespace MagicalGoods.Pages.Account
             sb.AppendLine($"<p>Your account {user.UserName} has been created successfully! Your cart can now magically store anything that catches your interest, and check out whenever you're ready.</p>");
             sb.AppendLine("<a href='https://magicalgoodsstore.azurewebsites.net/shop'>Click here to see today's goods on offer!</a>");
             return sb.ToString();
+        }
+
+        async Task AssignRolesToUser(ApplicationUser user)
+        {
+            await _userManager.AddToRoleAsync(user, ApplicationRoles.Customer);
+            List<string> adminEmails = new List<string>
+            {
+                "andrewc921@outlook.com",
+                "andrewbc.dev@outlook.com",
+                "areyes986@gmail.com",
+                "revyolution1120@gmail.com",
+                "rice.jonathanm@gmail.com",
+                "amanda@codefellows.com"
+            };
+
+            if (adminEmails.Contains(user.Email))
+            {
+                await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                await _userManager.AddToRoleAsync(user, ApplicationRoles.Vendor);
+            }
         }
 
         public class RegisterInput

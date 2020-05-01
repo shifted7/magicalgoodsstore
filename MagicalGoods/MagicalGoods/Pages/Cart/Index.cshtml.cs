@@ -37,6 +37,7 @@ namespace MagicalGoods.Pages.Cart
             }
             else
             {
+
                 return RedirectToPage("/Account/Login");
             }
         }

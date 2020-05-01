@@ -28,10 +28,9 @@ namespace MagicalGoods.Components
 
         public async Task<IViewComponentResult> InvokeAsync(string userId)
         {
-
-            List<CartProduct> cartProducts = await _cartProduct.GetAllProductsForCart(userId);
-            //UserCartProducts = await _cartProduct.GetAllProductsForCart(userId);
-            return View(cartProducts);
+            //List<CartProduct> cartProducts = await _cartProduct.GetAllProductsForCart(userId);
+            UserCartProducts = await _cartProduct.GetAllProductsForCart(userId);
+            return View(UserCartProducts);
         }
 
     }
