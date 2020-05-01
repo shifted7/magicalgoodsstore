@@ -66,10 +66,12 @@ namespace MagicalGoods.Models.Services
         /// </summary>
         /// <param name="product">The updated product, with an ID that matches the product to update.</param>
         /// <returns>The task for updating the given product.</returns>
-        public async Task UpdateProductAsync(Product product)
+        public async Task<Product> UpdateProductAsync(Product product)
         {
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
+            return product;
+
         }
     }
 }

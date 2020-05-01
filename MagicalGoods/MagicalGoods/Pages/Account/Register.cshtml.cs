@@ -69,7 +69,7 @@ namespace MagicalGoods.Pages.Account
                     await _userManager.AddClaimAsync(user, id);
                     await _userManager.AddClaimAsync(user, fullName);
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    await _signInManager.AddToRoleAsync(user, ApplicationRoles.Customer);
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Customer);
                     await _cartService.AddCartToUser(user.Id);
                     
                     string emailHTMLMessage = ComposeAccountWelcomeEmail(user);
