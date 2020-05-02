@@ -16,6 +16,7 @@ namespace MagicalGoods.Pages.Account
         /// uses dependency injection to bring in the signinmanager library from Identity
         /// </summary>
         private SignInManager<ApplicationUser> _signIn;
+        private UserManager<ApplicationUser> _userManager;
 
         [BindProperty]
         public LoginViewModel Input { get; set; }
@@ -24,9 +25,10 @@ namespace MagicalGoods.Pages.Account
         /// brings in the application model into the signinmanager library 
         /// </summary>
         /// <param name="signIn"></param>
-        public LoginModel(SignInManager<ApplicationUser> signIn)
+        public LoginModel(SignInManager<ApplicationUser> signIn, UserManager<ApplicationUser> userManager)
         {
             _signIn = signIn;
+            _userManager = userManager;
         }
 
         public void OnGet()
@@ -46,6 +48,13 @@ namespace MagicalGoods.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    ApplicationUser user = await _userManager.FindByEmailAsync(Input.Email);
+                   
+                    if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        return RedirectToPage("/Admin/Index");
+                    }
+
                     return RedirectToPage("/Shop/Index");
                 }
                 else
