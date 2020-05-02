@@ -77,6 +77,10 @@ namespace MagicalGoods.Pages.Account
                     string emailHTMLMessage = ComposeAccountWelcomeEmail(user);
                     await _emailSenderService.SendEmailAsync(user.Email, "Welcome, weary traveler!", emailHTMLMessage);
                     
+                    if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        return RedirectToPage("/Admin/Index");
+                    }
                     return RedirectToPage("/Shop/Index");
                 }
 

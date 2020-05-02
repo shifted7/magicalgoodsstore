@@ -13,3 +13,16 @@
     max-height: 200px;
     max-width: 300px;
 }
+
+section > a {
+    text-decoration: none;
+    color: black;
+    transition: transform .15s;
+    transition-timing-function: ease;
+}
+
+section > a:hover {
+    transform: scale(1.08);
+    text-decoration: none;
+    color: purple;
+}

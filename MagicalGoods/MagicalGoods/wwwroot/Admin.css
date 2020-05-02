@@ -1,0 +1,22 @@
+﻿body {
+}
+
+section{
+    display: flex;
+    justify-content: center;
+}
+
+section > a{
+    height: 400px;
+    width: 35%;
+    margin: 20px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+}
+
+section > a > span{
+    font-size: 48px;
+    align-self: center;
+}

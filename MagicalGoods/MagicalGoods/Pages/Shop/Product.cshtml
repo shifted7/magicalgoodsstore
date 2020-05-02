@@ -4,25 +4,26 @@
     Layout = "_Layout";
 }
 
-@await Component.InvokeAsync("Basket", @Model.UserId)
 
-<section>
-    <article class="d-flex justify-content-center">
-        <div class="row mt-5 p-5">
-            <div class="col-4 p-2">
-                <img class="img-fluid" src="@Model.CurrentProduct.Image" />
+
+    <section class="d-flex">
+        <article class="d-flex justify-content-center">
+            <div class="row mt-5 p-5">
+                <div class="col-4 p-2">
+                    <img class="img-fluid" src="@Model.CurrentProduct.Image" />
+                </div>
+                <div class="col-8 p-2">
+                    <h2>@Model.CurrentProduct.Name</h2>
+                    <p>@Model.CurrentProduct.Description</p>
+                    <h5>@Model.CurrentProduct.Price Galleons</h5>
+                    <form method="post">
+                        <button class="btn btn-primary" asp-route-productId="@Model.CurrentProduct.ID" type="submit">+ Add to Cart</button>
+                    </form>
+                </div>
             </div>
-            <div class="col-8 p-2">
-                <h2>@Model.CurrentProduct.Name</h2>
-                <p>@Model.CurrentProduct.Description</p>
-                <h5>@Model.CurrentProduct.Price Galleons</h5>
-                <form method="post">
-                    <button class="btn btn-primary" asp-route-productId="@Model.CurrentProduct.ID" type="submit">+ Add to Cart</button>
-                </form>
-            </div>
-        </div>
-
-
-    </article>
-</section>
+        </article>
+        <aside class="m-5 col-md-2">
+            @await Component.InvokeAsync("Basket", @Model.UserId)
+        </aside>
+    </section>
 

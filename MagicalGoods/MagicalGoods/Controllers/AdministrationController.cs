@@ -13,11 +13,11 @@ using Microsoft.AspNetCore.Authorization;
 namespace MagicalGoods.Controllers
 {
     [Authorize(Policy = "AdminOnly")]
-    public class AdminController : Controller
+    public class AdministrationController : Controller
     {
         private readonly IProductManager _product;
 
-        public AdminController(IProductManager product)
+        public AdministrationController(IProductManager product)
         {
             _product = product;
         }

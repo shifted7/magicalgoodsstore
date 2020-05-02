@@ -14,24 +14,29 @@
 
     <h2 class="pb-5 text-center">Our Magical Goods</h2>
 
-    <section class="d-flex justify-content-end">
-        @await Component.InvokeAsync("Basket", @Model.UserId)
-    </section>
+    <main class="row">
 
-    <section class="col-lg-10 d-flex flex-wrap">
-        @foreach (var product in Model.Products)
-        {
-            <article class="card">
-                <div>
-                    <img src="@product.Image" />
-                </div>
-                <div class="card-body">
-                    <h3 class="pt-2 card-title">@product.Name</h3>
-                    <p class="card-text">@product.Price Galleons</p>
-                </div>
-            </article>
-        }
-    </section>
+        <section class="col-lg-9 d-flex flex-wrap justify-content-around">
+            @foreach (var product in Model.Products)
+            {
+                <a asp-page="Product" asp-route-id="@product.ID">
+                    <article asp-page="" class="card">
+                        <div>
+                            <img src="@product.Image" />
+                        </div>
+                        <div class="card-body">
+                            <h3 class="pt-2 card-title">@product.Name</h3>
+                            <p class="card-text">@product.Price Galleons</p>
+                        </div>
+                    </article>
+                </a>
+            }
+        </section>
+
+        <section class="col-md-3">
+            @await Component.InvokeAsync("Basket", @Model.UserId)
+        </section>
+    </main>
 
 
 </body>

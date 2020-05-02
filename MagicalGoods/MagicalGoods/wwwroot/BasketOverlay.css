@@ -1,10 +1,14 @@
 ﻿body {
-    background-color: blue;
+    
 }
 
-.collapse {
-    position: absolute !important;
-
+main > .collapse {
+    /*position: absolute !important;*/
+    border: solid 1px lightgray;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
 }
 
 
