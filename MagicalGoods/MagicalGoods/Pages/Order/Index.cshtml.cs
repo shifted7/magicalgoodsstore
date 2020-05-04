@@ -17,16 +17,18 @@ namespace MagicalGoods.Pages.Order
         private IEmailSender _emailSender;
         private ICartProductManager _cartProduct;
         private UserManager<ApplicationUser> _userManager;
+        private ICartManager _cart;
 
         public List<CartProduct> CartProducts { get; set; }
         public string Email { get; set; }
 
 
-        public IndexModel(IEmailSender emailSender, ICartProductManager cartProduct, UserManager<ApplicationUser> userManager)
+        public IndexModel(IEmailSender emailSender, ICartProductManager cartProduct, UserManager<ApplicationUser> userManager, ICartManager cart)
         {
             _emailSender = emailSender;
             _cartProduct = cartProduct;
             _userManager = userManager;
+            _cart = cart;
         }
         public void OnGet()
         {
@@ -53,6 +55,9 @@ namespace MagicalGoods.Pages.Order
             string email = _userManager.GetUserName(User);
 
             await _emailSender.SendEmailAsync(email, "Receipt", sb.ToString());
+
+            await _cart.AddCartToUser(userId);
+
             return RedirectToPage("/Checkout/Receipt");
         }
     }

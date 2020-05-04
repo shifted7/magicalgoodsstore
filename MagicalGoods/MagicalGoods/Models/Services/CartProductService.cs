@@ -1,5 +1,6 @@
 ﻿using MagicalGoods.Data;
 using MagicalGoods.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace MagicalGoods.Models.Services
     public class CartProductService : ICartProductManager
     {
         private readonly StoreDbContext _storeContext;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CartProductService(StoreDbContext storeContext)
+        public CartProductService(StoreDbContext storeContext, UserManager<ApplicationUser> userManager)
         {
             _storeContext = storeContext;
+            _userManager = userManager;
         }
         public async Task AddProductToCart(CartProduct cartProduct)
         {

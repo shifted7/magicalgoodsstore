@@ -10,20 +10,22 @@
 
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#basket" aria-expanded="true">Toggle Cart</button>
 
-    <main>
-        <section class="collapse show" id="basket">
-            @foreach (var cartProduct in Model)
-            {
-                total += cartProduct.Product.Price * cartProduct.Quantity;
-                <h5>@cartProduct.Product.Name</h5>
-                <p>@(cartProduct.Product.Price * cartProduct.Quantity)</p>
-            }
+    <main class="basket">
+        <div id="basket" class="collapse show">
+            <section>
+                @foreach (var cartProduct in Model)
+                {
+                    total += cartProduct.Product.Price * cartProduct.Quantity;
+                    <h5>@cartProduct.Quantity x @cartProduct.Product.Name</h5>
+                    <p>@(cartProduct.Product.Price * cartProduct.Quantity) Galleons</p>
+                }
 
 
-            <p>Total Price: @total Galleons</p>
-            <a class="btn btn-success" asp-page="/Cart/Index">View your cart</a>
+                <p>Total Price: @total Galleons</p>
+                <a class="btn btn-success" asp-page="/Cart/Index">View your cart</a>
 
-        </section>
+            </section>
+        </div>
 
     </main>
 
