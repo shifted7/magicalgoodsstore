@@ -39,6 +39,7 @@ namespace MagicalGoods
             services.AddTransient<ICartManager, CartService>();
             services.AddTransient<ICartProductManager, CartProductService>();
             services.AddTransient<IEmailSender, EmailSenderService>();
+            services.AddTransient<IPaymentManager, PaymentService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
