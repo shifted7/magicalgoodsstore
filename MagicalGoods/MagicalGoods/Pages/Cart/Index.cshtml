@@ -30,7 +30,7 @@
                         <h4>@cartProduct.Product.Name</h4>
                     </a>
                     <label>QTY: </label>
-                    <input value="@cartProduct.Quantity" asp-for="@cartProduct.Quantity" />
+                    <input min="1" value="@cartProduct.Quantity" asp-for="@cartProduct.Quantity" />
                     <p>Price: @cartProduct.Product.Price x @cartProduct.Quantity</p>
                     <p>Sub-total: @(cartProduct.Product.Price * cartProduct.Quantity) Galleons</p>
                 </div>

@@ -14,15 +14,30 @@
     max-width: 300px;
 }
 
-section > a {
+.card {
     text-decoration: none;
     color: black;
     transition: transform .15s;
     transition-timing-function: ease;
 }
 
-section > a:hover {
+/*section a:hover {
     transform: scale(1.08);
     text-decoration: none;
-    color: purple;
+    color: mediumorchid;
+}*/
+
+section a {
+    text-decoration: none;
+}
+
+section a:hover {
+    text-decoration: none;
+}
+
+.card:hover {
+    transform: scale(1.08);
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 .5rem 1rem rgba(186,85,211,.4) !important;
 }

@@ -43,8 +43,15 @@ namespace MagicalGoods.Pages.Shop
 
         public async Task<IActionResult> OnPost(int productId)
         {
+
             string userId = _userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
             int cartId = _cartService.GetCartByUserID(userId).ID;
+
             CartProduct cartProduct = new CartProduct()
             {
                 CartID = cartId,

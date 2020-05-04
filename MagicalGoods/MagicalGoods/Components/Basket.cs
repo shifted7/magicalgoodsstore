@@ -14,16 +14,12 @@ namespace MagicalGoods.Components
     public class Basket : ViewComponent
     {
         private ICartProductManager _cartProduct;
-        private UserManager<ApplicationUser> _userManager;
-        private ICartManager _cart;
 
         public List<CartProduct> UserCartProducts { get; set; }
 
-        public Basket(ICartProductManager cartProduct, UserManager<ApplicationUser> userManager, ICartManager cart)
+        public Basket(ICartProductManager cartProduct)
         {
             _cartProduct = cartProduct;
-            _userManager = userManager;
-            _cart = cart;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(string userId)
