@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicalGoods.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200429192809_addedtables")]
-    partial class addedtables
+    [Migration("20200504025733_sprinttwodeploy")]
+    partial class sprinttwodeploy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

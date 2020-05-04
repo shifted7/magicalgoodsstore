@@ -2,7 +2,7 @@
 
 namespace MagicalGoods.Migrations.StoreDb
 {
-    public partial class reset2 : Migration
+    public partial class sprinttwodeploy : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

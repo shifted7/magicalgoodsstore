@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MagicalGoods.Migrations
 {
-    public partial class reset2 : Migration
+    public partial class resetremote : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

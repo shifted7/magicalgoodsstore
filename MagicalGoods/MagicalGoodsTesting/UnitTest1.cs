@@ -265,91 +265,91 @@ namespace MagicalGoodsTests
             };
         }
 
-        [Fact]
-        public async void CanAddProductToCart()
-        {
-            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
-            .UseInMemoryDatabase("CanAddProductToCartTest")
-            .Options;
+        //[Fact]
+        //public async void CanAddProductToCart()
+        //{
+        //    DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+        //    .UseInMemoryDatabase("CanAddProductToCartTest")
+        //    .Options;
 
-            using (StoreDbContext storeContext = new StoreDbContext(options))
-            {
-                CartProductService cps = new CartProductService(storeContext);
+        //    using (StoreDbContext storeContext = new StoreDbContext(options))
+        //    {
+        //        CartProductService cps = new CartProductService(storeContext);
 
-                CartProduct testCartProduct = new CartProduct()
-                {
-                    ID = 1,
-                    CartID = 2,
-                    ProductID = 4,
-                    Quantity = 12
-                };
+        //        CartProduct testCartProduct = new CartProduct()
+        //        {
+        //            ID = 1,
+        //            CartID = 2,
+        //            ProductID = 4,
+        //            Quantity = 12
+        //        };
 
-                await cps.AddProductToCart(testCartProduct);
+        //        await cps.AddProductToCart(testCartProduct);
 
-                var result = await cps.GetCartProductById(testCartProduct.ID);
-                Assert.Equal(12, result.Quantity);
-            };
-        }
+        //        var result = await cps.GetCartProductById(testCartProduct.ID);
+        //        Assert.Equal(12, result.Quantity);
+        //    };
+        //}
 
-        [Fact]
-        public async void CanRemoveProduct()
-        {
-            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
-            .UseInMemoryDatabase("CanRemoveProductTest")
-            .Options;
+        //[Fact]
+        //public async void CanRemoveProduct()
+        //{
+        //    DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+        //    .UseInMemoryDatabase("CanRemoveProductTest")
+        //    .Options;
 
-            using (StoreDbContext storeContext = new StoreDbContext(options))
-            {
-                CartProductService cps = new CartProductService(storeContext);
+        //    using (StoreDbContext storeContext = new StoreDbContext(options))
+        //    {
+        //        CartProductService cps = new CartProductService(storeContext);
 
-                CartProduct testCartProduct = new CartProduct()
-                {
-                    ID = 2,
-                    CartID = 4,
-                    ProductID = 5,
-                    Quantity = 10
-                };
+        //        CartProduct testCartProduct = new CartProduct()
+        //        {
+        //            ID = 2,
+        //            CartID = 4,
+        //            ProductID = 5,
+        //            Quantity = 10
+        //        };
 
-                await cps.AddProductToCart(testCartProduct);
+        //        await cps.AddProductToCart(testCartProduct);
 
-                await cps.RemoveProduct(2);
+        //        await cps.RemoveProduct(2);
 
-                var result = await cps.GetCartProductById(testCartProduct.ID);
+        //        var result = await cps.GetCartProductById(testCartProduct.ID);
 
-                Assert.Null(result);
-            };
+        //        Assert.Null(result);
+        //    };
 
-        }
+        //}
 
-        [Fact]
-        public async void CanUpdateProductQuantity()
-        {
-            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
-            .UseInMemoryDatabase("CanUpdateProductQuantityTest")
-            .Options;
+        //[Fact]
+        //public async void CanUpdateProductQuantity()
+        //{
+        //    DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+        //    .UseInMemoryDatabase("CanUpdateProductQuantityTest")
+        //    .Options;
 
-            using (StoreDbContext storeContext = new StoreDbContext(options))
-            {
-                CartProductService cps = new CartProductService(storeContext);
+        //    using (StoreDbContext storeContext = new StoreDbContext(options))
+        //    {
+        //        CartProductService cps = new CartProductService(storeContext);
 
-                CartProduct testCartProduct = new CartProduct()
-                {
-                    ID = 3,
-                    CartID = 7,
-                    ProductID = 2,
-                    Quantity = 1
-                };
+        //        CartProduct testCartProduct = new CartProduct()
+        //        {
+        //            ID = 3,
+        //            CartID = 7,
+        //            ProductID = 2,
+        //            Quantity = 1
+        //        };
 
-                await cps.AddProductToCart(testCartProduct);
+        //        await cps.AddProductToCart(testCartProduct);
 
-                await cps.UpdateProductQuantity(3, 500);
+        //        await cps.UpdateProductQuantity(3, 500);
 
-                var result = await cps.GetCartProductById(testCartProduct.ID);
+        //        var result = await cps.GetCartProductById(testCartProduct.ID);
 
-                Assert.Equal(500, result.Quantity);
-            };
+        //        Assert.Equal(500, result.Quantity);
+        //    };
 
-        }
+        //}
 
     }
 }

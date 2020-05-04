@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicalGoods.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200429005635_reset2")]
-    partial class reset2
+    [Migration("20200504024647_resetremote")]
+    partial class resetremote
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
