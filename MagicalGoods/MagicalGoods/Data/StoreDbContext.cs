@@ -96,12 +96,12 @@ namespace MagicalGoods.Data
                         Price = 1000.00m,
                         Description = "A powerful wand with a core made from the feather of a pheonix"
                     }
-
                 );
         }
 
         public DbSet<Product> Products { get; set; }
-
+        public DbSet<CartProduct> CartProducts { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
     }
 }

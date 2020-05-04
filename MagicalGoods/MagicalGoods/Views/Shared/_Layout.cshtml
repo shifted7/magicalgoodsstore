@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Fondamento&display=swap" rel="stylesheet">
+    <link href="~/StyleSheet.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -24,31 +26,40 @@
             <ul class="navbar-nav ml-auto float-right text-right pr-2">
                 @if (SignInManager.IsSignedIn(User))
                 {
-
                     <li class="pr-3 my-auto">You're a Wizard @User.Claims.First(x => x.Type == "FullName").Value!</li>
-                    <li class="navbar-item">
-                        <a class="nav-link" asp-page="/Shop/Index">Shop</a>
-                    </li>
-                    <li class="nav-item">
-
-                        <form asp-page="/Account/Logout">
-                            <button class="btn btn-outline-dark" type="submit"> Logout </button>
-                        </form>
-                    </li>
                 }
-                else
+
+                @if (SignInManager.IsSignedIn(User) == false)
                 {
-                    <li class="navbar-item">
-                        <a class="nav-link" asp-page="/Shop/Index">Shop</a>
-                    </li>
                     <li class="navbar-item">
                         <a class="nav-link" asp-page="/Account/Login">Login</a>
                     </li>
                     <li class="navbar-item">
                         <a class="nav-link" asp-page="/Account/Register">Register</a>
                     </li>
-
                 }
+
+                <li class="navbar-item">
+                    <a class="nav-link" asp-page="/Shop/Index">Shop</a>
+                </li>
+
+
+
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Cart/Index">
+                            <img src="~/img/cart-icon.png" height="20" />
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form asp-page="/Account/Logout">
+                            <button class="btn btn-outline-dark" type="submit"> Logout </button>
+                        </form>
+                    </li>
+                }
+
             </ul>
         </div>
     </nav>

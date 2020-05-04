@@ -1,0 +1,28 @@
+﻿@page
+@model MagicalGoods.Pages.Checkout.ReceiptModel
+@{
+    Layout = "_Layout";
+}
+
+<h1>Your receipt:</h1>
+
+@foreach(var cartProduct in Model.CheckoutCartProducts)
+{
+    <div class="row justify-content-center align-items-center p-2">
+        <div class="col-md-2">
+            <a asp-page="/Shop/Product" asp-route-id="@cartProduct.ProductID">
+                <img class="img-fluid" src="@cartProduct.Product.Image" />
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a asp-page="/Shop/Product" asp-route-id="@cartProduct.ProductID">
+                <h4>@cartProduct.Product.Name</h4>
+            </a>
+            <p>QTY: @cartProduct.Quantity</p>
+            <p>Sub-total: @(cartProduct.Product.Price * cartProduct.Quantity) Galleons</p>
+        </div>
+    </div>
+}
+
+<h2>Total: @Model.Total</h2>

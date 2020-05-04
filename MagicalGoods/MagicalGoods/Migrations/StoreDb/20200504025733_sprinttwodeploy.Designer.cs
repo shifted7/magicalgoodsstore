@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicalGoods.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200422012258_Initial")]
-    partial class Initial
+    [Migration("20200504025733_sprinttwodeploy")]
+    partial class sprinttwodeploy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,46 @@ namespace MagicalGoods.Migrations.StoreDb
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("MagicalGoods.Models.Cart", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("MagicalGoods.Models.CartProduct", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CartID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CartID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("CartProducts");
+                });
 
             modelBuilder.Entity("MagicalGoods.Models.Product", b =>
                 {
@@ -91,7 +131,53 @@ namespace MagicalGoods.Migrations.StoreDb
                             Image = "https://media-waterdeep.cursecdn.com/avatars/thumbnails/7/120/1000/1000/636284708068284913.jpeg",
                             Name = "Bag of Holding",
                             Price = 400.00m
+                        },
+                        new
+                        {
+                            ID = 7,
+                            Description = "Just press a button, and this rod will fix itself in place. Defy gravity!",
+                            Image = "https://media-waterdeep.cursecdn.com/avatars/thumbnails/7/261/1000/1000/636284741670235041.jpeg",
+                            Name = "Immovable Rod",
+                            Price = 50.00m
+                        },
+                        new
+                        {
+                            ID = 8,
+                            Description = "Magically transform into anyone with just a small piece of their hair!",
+                            Image = "https://i.stack.imgur.com/LerE3.jpg",
+                            Name = "Polyjuice Potion",
+                            Price = 150.00m
+                        },
+                        new
+                        {
+                            ID = 9,
+                            Description = "Put on these slippers, and walk on any surface!",
+                            Image = "https://media-waterdeep.cursecdn.com/avatars/thumbnails/7/402/1000/1000/636284767446806965.jpeg",
+                            Name = "Slippers of Spider Climb",
+                            Price = 250.00m
+                        },
+                        new
+                        {
+                            ID = 10,
+                            Description = "A powerful wand with a core made from the feather of a pheonix",
+                            Name = "Pheonix-core Wand",
+                            Price = 1000.00m
                         });
+                });
+
+            modelBuilder.Entity("MagicalGoods.Models.CartProduct", b =>
+                {
+                    b.HasOne("MagicalGoods.Models.Cart", null)
+                        .WithMany("CartProducts")
+                        .HasForeignKey("CartID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MagicalGoods.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

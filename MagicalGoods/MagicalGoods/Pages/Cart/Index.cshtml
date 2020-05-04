@@ -1,0 +1,48 @@
+﻿@page
+@model MagicalGoods.Pages.Cart.IndexModel
+@{
+    Layout = "_Layout";
+}
+
+<h1 class="text-center">My Cart</h1>
+
+<section class="d-flex justify-content-center">
+    <form class="d-flex justify-content-end col-9" method="post">
+        <div class="d-flex flex-column align-items-center">
+            <p>Cart Total: @Model.Total</p>
+            <button asp-page="/Order/Index" class="btn btn-success">Checkout</button>
+        </div>
+    </form>
+</section>
+
+    @foreach (var cartProduct in Model.UserCartProducts)
+    {
+        <form method="post">
+            <div class="row justify-content-center align-items-center p-2">
+                <div class="col-md-2">
+                    <a asp-page="/Shop/Product" asp-route-id="@cartProduct.ProductID">
+                        <img class="img-fluid" src="@cartProduct.Product.Image" />
+                    </a>
+                </div>
+
+                <div class="col-md-4">
+                    <a asp-page="/Shop/Product" asp-route-id="@cartProduct.ProductID">
+                        <h4>@cartProduct.Product.Name</h4>
+                    </a>
+                    <label>QTY: </label>
+                    <input min="1" value="@cartProduct.Quantity" asp-for="@cartProduct.Quantity" />
+                    <p>Price: @cartProduct.Product.Price x @cartProduct.Quantity</p>
+                    <p>Sub-total: @(cartProduct.Product.Price * cartProduct.Quantity) Galleons</p>
+                </div>
+                <div class="col-md-3">
+                    <input asp-for="@cartProduct.ID" value="@cartProduct.ID" hidden />
+                    <button asp-page="/Cart/Update" class="btn btn-primary m-3">Update Quantity</button>
+                    <button asp-page="/Cart/Remove" class="btn btn-primary m-3">Remove</button>
+                </div>
+            </div>
+        </form>
+
+    }
+
+
+

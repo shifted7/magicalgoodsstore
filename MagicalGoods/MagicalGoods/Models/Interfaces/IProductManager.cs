@@ -14,10 +14,11 @@ namespace MagicalGoods.Models.Interfaces
 
         //Read
         Task<Product> GetProductByIdAsync(int productId);
+
         Task<List<Product>> GetAllProductsAsync();
 
         //Update
-        Task UpdateProductAsync(Product product);
+        Task<Product> UpdateProductAsync(Product product);
 
         //Delete
         Task RemoveProductByIdAsync(int productId);

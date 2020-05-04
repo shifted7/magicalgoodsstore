@@ -8,27 +8,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Our Goods</title>
+    <link href="~/Shop.css" rel="stylesheet" />
 </head>
 <body>
 
     <h2 class="pb-5 text-center">Our Magical Goods</h2>
 
-    <section class=" col-lg-10 text-center row mx-auto">
-        @foreach (var product in Model.Products)
-        {
-            <article class="col-md-4 my-2">
-                <div class="card">
-                    <a asp-page="product" asp-route-id="@product.ID">
-                        <img class="card-img-top" src="@product.Image" />
-                    </a>
-                    <div class="card-body">
-                        <h3 class="pt-2 card-title">@product.Name</h3>
-                        <p class="card-text">@product.Price Galleons</p>
-                    </div>
-                </div>
-            </article>
-        }
-    </section>
+    <main class="row">
+
+        <section class="col-lg-9 d-flex flex-wrap justify-content-around">
+            @foreach (var product in Model.Products)
+            {
+                <a asp-page="Product" asp-route-id="@product.ID">
+                    <article asp-page="" class="card">
+                        <div>
+                            <img src="@product.Image" />
+                        </div>
+                        <div class="card-body">
+                            <h3 class="pt-2 card-title">@product.Name</h3>
+                            <p class="card-text">@product.Price Galleons</p>
+                        </div>
+                    </article>
+                </a>
+            }
+        </section>
+
+        <section class="col-md-3">
+            @await Component.InvokeAsync("Basket", @Model.UserId)
+        </section>
+    </main>
+
 
 </body>
 </html>

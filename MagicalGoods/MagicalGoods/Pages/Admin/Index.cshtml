@@ -1,0 +1,22 @@
+﻿@page
+@model MagicalGoods.Pages.Admin.IndexModel
+@{
+    Layout = "_Layout";
+}
+
+    <head>
+        <link href="~/Admin.css" rel="stylesheet" />
+    </head>
+    <body>
+        <section>
+            <a asp-controller="Administration" asp-action="Index" class="btn btn-info ">
+                <span>Products</span>
+            </a>
+            <a  class="btn btn-info" href="#">
+                <span>Orders</span>
+            </a>
+        </section>
+
+    </body>
+
+

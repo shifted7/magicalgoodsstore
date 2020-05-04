@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MagicalGoods.Models;
 using MagicalGoods.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -14,10 +15,18 @@ namespace MagicalGoods.Pages.Shop
 
         // uses dependency injection to use a method from the IProductManager Interface
         private IProductManager _productService { get; set; }
+        public string UserId { get; set; }
 
-        public ProductModel(IProductManager productService)
+        private UserManager<ApplicationUser> _userManager;
+        private ICartProductManager _cartProductService;
+        private ICartManager _cartService;
+
+        public ProductModel(IProductManager productService, UserManager<ApplicationUser> userManager, ICartProductManager cartProductService, ICartManager cartService)
         {
             _productService = productService;
+            _userManager = userManager;
+            _cartProductService = cartProductService;
+            _cartService = cartService;
         }
 
         public Product CurrentProduct { get; set; }
@@ -25,9 +34,32 @@ namespace MagicalGoods.Pages.Shop
         // As the user click on a specific product from the shop page, this OnGet method uses the GetProductByID method from the product interface to display the product by that specific ID
         public async Task<IActionResult> OnGet(int id)
         {
+            UserId = _userManager.GetUserId(User);
+
             var result = await _productService.GetProductByIdAsync(id);
             CurrentProduct = result;
             return Page();
+        }
+
+        public async Task<IActionResult> OnPost(int productId)
+        {
+
+            string userId = _userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            int cartId = _cartService.GetCartByUserID(userId).ID;
+
+            CartProduct cartProduct = new CartProduct()
+            {
+                CartID = cartId,
+                ProductID = productId,
+                Quantity = 1
+            };
+            await _cartProductService.AddProductToCart(cartProduct);
+            return RedirectToPage("/Shop/Index");
         }
     }
 }

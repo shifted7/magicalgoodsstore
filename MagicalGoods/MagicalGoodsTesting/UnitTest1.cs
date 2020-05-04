@@ -237,5 +237,119 @@ namespace MagicalGoodsTests
                 Assert.Equal(updatedName, result.Name);
             }
         }
+
+
+        [Fact]
+        public void CanCreateEmptyCart()
+        {
+            Cart cart = new Cart();
+            Assert.Null(cart.UserId);
+        }
+
+        [Fact]
+        public async void CanAddCartToUser()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+            .UseInMemoryDatabase("CanAddCartToUserTest")
+            .Options;
+
+            using(StoreDbContext cartContext = new StoreDbContext(options))
+            {
+                CartService cs = new CartService(cartContext);
+
+                Cart addedCart = await cs.AddCartToUser("1");
+
+                var result = cs.GetCartByUserID("1");
+
+                Assert.Equal("1", result.UserId);
+            };
+        }
+
+        //[Fact]
+        //public async void CanAddProductToCart()
+        //{
+        //    DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+        //    .UseInMemoryDatabase("CanAddProductToCartTest")
+        //    .Options;
+
+        //    using (StoreDbContext storeContext = new StoreDbContext(options))
+        //    {
+        //        CartProductService cps = new CartProductService(storeContext);
+
+        //        CartProduct testCartProduct = new CartProduct()
+        //        {
+        //            ID = 1,
+        //            CartID = 2,
+        //            ProductID = 4,
+        //            Quantity = 12
+        //        };
+
+        //        await cps.AddProductToCart(testCartProduct);
+
+        //        var result = await cps.GetCartProductById(testCartProduct.ID);
+        //        Assert.Equal(12, result.Quantity);
+        //    };
+        //}
+
+        //[Fact]
+        //public async void CanRemoveProduct()
+        //{
+        //    DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+        //    .UseInMemoryDatabase("CanRemoveProductTest")
+        //    .Options;
+
+        //    using (StoreDbContext storeContext = new StoreDbContext(options))
+        //    {
+        //        CartProductService cps = new CartProductService(storeContext);
+
+        //        CartProduct testCartProduct = new CartProduct()
+        //        {
+        //            ID = 2,
+        //            CartID = 4,
+        //            ProductID = 5,
+        //            Quantity = 10
+        //        };
+
+        //        await cps.AddProductToCart(testCartProduct);
+
+        //        await cps.RemoveProduct(2);
+
+        //        var result = await cps.GetCartProductById(testCartProduct.ID);
+
+        //        Assert.Null(result);
+        //    };
+
+        //}
+
+        //[Fact]
+        //public async void CanUpdateProductQuantity()
+        //{
+        //    DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+        //    .UseInMemoryDatabase("CanUpdateProductQuantityTest")
+        //    .Options;
+
+        //    using (StoreDbContext storeContext = new StoreDbContext(options))
+        //    {
+        //        CartProductService cps = new CartProductService(storeContext);
+
+        //        CartProduct testCartProduct = new CartProduct()
+        //        {
+        //            ID = 3,
+        //            CartID = 7,
+        //            ProductID = 2,
+        //            Quantity = 1
+        //        };
+
+        //        await cps.AddProductToCart(testCartProduct);
+
+        //        await cps.UpdateProductQuantity(3, 500);
+
+        //        var result = await cps.GetCartProductById(testCartProduct.ID);
+
+        //        Assert.Equal(500, result.Quantity);
+        //    };
+
+        //}
+
     }
 }

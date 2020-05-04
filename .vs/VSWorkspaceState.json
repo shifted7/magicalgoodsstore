@@ -3,8 +3,8 @@
     "",
     "\\MagicalGoods",
     "\\MagicalGoods\\MagicalGoods",
-    "\\MagicalGoods\\MagicalGoods\\wwwroot"
+    "\\MagicalGoods\\MagicalGoods\\Pages"
   ],
-  "SelectedNode": "\\MagicalGoods\\MagicalGoods\\wwwroot\\StyleSheet.css",
+  "SelectedNode": "\\MagicalGoods\\MagicalGoods\\Startup.cs",
   "PreviewInSolutionExplorer": false
 }
