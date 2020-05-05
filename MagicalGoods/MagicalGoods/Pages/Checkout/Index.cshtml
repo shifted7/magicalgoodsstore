@@ -1,8 +1,62 @@
 ﻿@page
 @model MagicalGoods.Pages.Checkout.IndexModel
 @{
+    Layout = "_Layout";
 }
 
-    <form asp-page="/Checkout/Payment" method="post">
-        <button type="submit">TEST PAYMENT</button>
+    
+<h1>Checkout</h1>
+<main>
+    <form method="post">
+        <div class="d-flex justify-content-around">
+            <section class="card">
+                <h2>Please enter the following information:</h2>
+                <div asp-validation-summary="All"></div>
+                <label>First Name:</label>
+                <input asp-validation-for="UserData.FirstName" placeholder="Enter Text" />
+                <br />
+                <label>Last Name:</label>
+                <input asp-for="UserData.LastName" placeholder="Enter Text" />
+                <br />
+                <label>Shipping Address:</label>
+                <input asp-for="UserData.ShippingAddressLine1" placeholder="Enter address line 1" />
+                <br />
+                <input asp-for="UserData.ShippingAddressLine2" placeholder="Enter address line 2" />
+                <br />
+                <label>City:</label>
+                <input asp-for="UserData.City" placeholder="Enter Text" />
+                <br />
+                <label>Zip Code:</label>
+                <input asp-for="UserData.ZipCode" placeholder="Enter Text" />
+                <label>State/Province:</label>
+                <input asp-for="UserData.StateOrProvince" placeholder="Enter Text" />
+                <br />
+                <label>Country:</label>
+                <input asp-for="UserData.Country" placeholder="Enter Text" />
+                <br />
+                <label>Payment:</label>
+                <select asp-for="UserData.Payment" name="card">
+                    <option value="4111111111111111">4111111111111111</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                
+            </section>
+            <section class="card">
+                <h2>Cart:</h2>
+                @foreach (var cartProduct in Model.CheckoutCartProducts)
+                {
+                    <div>
+                        <p>@cartProduct.Product.Name</p>
+                        <p>QTY: @cartProduct.Quantity</p>
+                        <p>Sub-total: @(cartProduct.Quantity * cartProduct.Product.Price)</p>
+                    </div>
+
+                }
+                <h4>Total: @Model.Total</h4>
+            </section>
+        </div>
+        <a asp-page="/Cart/Index" class="btn btn-secondary">Return to Cart</a>
+        <button asp-page="/Checkout/Payment" class="btn btn-success">Complete Checkout</button>
     </form>
+</main>

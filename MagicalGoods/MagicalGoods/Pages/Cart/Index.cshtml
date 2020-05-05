@@ -7,12 +7,12 @@
 <h1 class="text-center">My Cart</h1>
 
 <section class="d-flex justify-content-center">
-    <form class="d-flex justify-content-end col-9" method="post">
+    <div class="d-flex justify-content-end col-9">
         <div class="d-flex flex-column align-items-center">
             <p>Cart Total: @Model.Total</p>
-            <button asp-page="/Checkout/Index" class="btn btn-success">Checkout</button>
+            <a asp-page="/Checkout/Index" class="btn btn-success">Checkout</a>
         </div>
-    </form>
+    </div>
 </section>
 
     @foreach (var cartProduct in Model.UserCartProducts)

@@ -10,8 +10,13 @@ namespace MagicalGoods.Pages.Cart
 {
     public class PaymentModel : PageModel
     {
+        
+        
         private IPaymentManager _paymentService;
+        
+        
         public string result;
+
         public PaymentModel(IPaymentManager paymentService)
         {
             _paymentService = paymentService;

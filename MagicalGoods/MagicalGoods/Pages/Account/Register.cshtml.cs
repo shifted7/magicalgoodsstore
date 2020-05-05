@@ -129,7 +129,7 @@ namespace MagicalGoods.Pages.Account
             public string FirstName { get; set; }
 
             [Required]
-            [Display(Name = "First Name")]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
             [Required]
