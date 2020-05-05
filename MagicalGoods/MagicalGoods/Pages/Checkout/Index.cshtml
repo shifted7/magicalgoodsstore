@@ -13,34 +13,52 @@
                 <h2>Please enter the following information:</h2>
                 <div asp-validation-summary="All"></div>
                 <label>First Name:</label>
-                <input asp-validation-for="UserData.FirstName" placeholder="Enter Text" />
+                <input asp-for="Input.FirstName" placeholder="Enter Text" />
+                <span asp-validation-for="Input.FirstName" span></span>
+
                 <br />
                 <label>Last Name:</label>
-                <input asp-for="UserData.LastName" placeholder="Enter Text" />
+                <input asp-for="Input.LastName" placeholder="Enter Text" />
+                <span asp-validation-for="Input.LastName" span></span>
+
                 <br />
                 <label>Shipping Address:</label>
-                <input asp-for="UserData.ShippingAddressLine1" placeholder="Enter address line 1" />
+                <input asp-for="Input.ShippingAddressLine1" placeholder="Enter address line 1" />
+                <span asp-validation-for="Input.ShippingAddressLine1" span></span>
+
                 <br />
-                <input asp-for="UserData.ShippingAddressLine2" placeholder="Enter address line 2" />
+                <input asp-for="Input.ShippingAddressLine2" placeholder="Enter address line 2" />
+                <span asp-validation-for="Input.ShippingAddressLine2" span></span>
+
                 <br />
                 <label>City:</label>
-                <input asp-for="UserData.City" placeholder="Enter Text" />
+                <input asp-for="Input.City" placeholder="Enter Text" />
+                <span asp-validation-for="Input.City" span></span>
+
                 <br />
                 <label>Zip Code:</label>
-                <input asp-for="UserData.ZipCode" placeholder="Enter Text" />
+                <input asp-for="Input.ZipCode" placeholder="Enter Text" />
+                <span asp-validation-for="Input.ZipCode" span></span>
+
                 <label>State/Province:</label>
-                <input asp-for="UserData.StateOrProvince" placeholder="Enter Text" />
+                <input asp-for="Input.StateOrProvince" placeholder="Enter Text" />
+                <span asp-validation-for="Input.StateOrProvince" span></span>
+
                 <br />
                 <label>Country:</label>
-                <input asp-for="UserData.Country" placeholder="Enter Text" />
+                <input asp-for="Input.Country" placeholder="Enter Text" />
+                <span asp-validation-for="Input.Country" span></span>
+
                 <br />
-                <label>Payment:</label>
-                <select asp-for="UserData.Payment" name="card">
-                    <option value="4111111111111111">4111111111111111</option>
-                    <option>2</option>
-                    <option>3</option>
+                <label>Payment Type:</label>
+                <select asp-for="Input.Payment">
+                    <option value="4111111111111111">Visa</option>
+                    <option value="5424000000000015">MasterCard</option>
+                    <option value="370000000000002">American Express</option>
                 </select>
-                
+                <span asp-validation-for="Input.Payment" span></span>
+
+
             </section>
             <section class="card">
                 <h2>Cart:</h2>

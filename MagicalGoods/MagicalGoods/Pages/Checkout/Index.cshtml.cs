@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using static MagicalGoods.Pages.Account.RegisterModel;
+using static MagicalGoods.Pages.Checkout.PaymentModel;
 
 namespace MagicalGoods.Pages.Checkout
 {
@@ -16,11 +17,9 @@ namespace MagicalGoods.Pages.Checkout
     {
         private UserManager<ApplicationUser> _userManager;
         private ICartProductManager _cartProductService;
+        public CheckoutInput Input { get; set; }
         public List<CartProduct> CheckoutCartProducts { get; set; }
         public decimal Total { get; set; }
-
-        [BindProperty]
-        public CheckoutInput UserData { get; set; }
 
         public IndexModel(UserManager<ApplicationUser> userManager, ICartProductManager cartProductService)
         {
@@ -40,43 +39,6 @@ namespace MagicalGoods.Pages.Checkout
                 return Page();
             }
             return RedirectToPage("/Account/Login");
-        }
-        public class CheckoutInput
-        {
-            [Required]
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
-
-            [Required]
-            [Display(Name = "Last Name")]
-            public string LastName { get; set; }
-
-            [Required]
-            [Display(Name = "Shipping Address Line 1")]
-            public string ShippingAddressLine1 { get; set; }
-
-            [Display(Name = "Shipping Address Line 2")]
-            public string ShippingAddressLine2 { get; set; }
-
-            [Required]
-            [Display(Name ="City")]
-            public string City { get; set; }
-
-            [Required]
-            [Display(Name = "Zip Code")]
-            public string ZipCode { get; set; }
-
-            [Required]
-            [Display(Name = "StateOrProvince")]
-            public string StateOrProvince { get; set; }
-
-            [Required]
-            [Display(Name = "Country")]
-            public string Country { get; set; }
-
-            [Required]
-            [Display(Name = "Payment")]
-            public string Payment { get; set; }
         }
     }
 }
