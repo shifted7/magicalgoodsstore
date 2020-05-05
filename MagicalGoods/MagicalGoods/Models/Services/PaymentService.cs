@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static MagicalGoods.Pages.Checkout.IndexModel;
+using static MagicalGoods.Pages.Checkout.PaymentModel;
 
 namespace MagicalGoods.Models.Services
 {
@@ -16,14 +16,12 @@ namespace MagicalGoods.Models.Services
     {
         private IConfiguration _config;
 
-        [BindProperty]
-        public CheckoutInput Input { get; set; }
         public PaymentService(IConfiguration configuration)
         {
             _config = configuration;
         }
 
-        public string Run()
+        public string Run(CheckoutInput checkoutInput)
         {
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType()
@@ -35,12 +33,12 @@ namespace MagicalGoods.Models.Services
 
             var creditCard = new creditCardType
             {
-                cardNumber = Input.Payment,
+                cardNumber = checkoutInput.Payment,
                 expirationDate = "1021",
                 cardCode = "102"
             };
 
-            customerAddressType billingAddress = GetAddress();
+            customerAddressType billingAddress = GetAddress(checkoutInput);
 
             var paymentType = new paymentType { Item = creditCard };
 
@@ -71,17 +69,17 @@ namespace MagicalGoods.Models.Services
             return "Failed to recieve response";
         }
 
-        public customerAddressType GetAddress()
+        public customerAddressType GetAddress(CheckoutInput checkoutInput)
         {
             customerAddressType address = new customerAddressType
             {
-                firstName = Input.FirstName,
-                lastName = Input.LastName,
-                address = $"{Input.ShippingAddressLine1} {Input.ShippingAddressLine2}",
-                city = Input.City,
-                state = Input.StateOrProvince,
-                zip = Input.ZipCode,
-                country = Input.Country
+                firstName = checkoutInput.FirstName,
+                lastName = checkoutInput.LastName,
+                address = $"{checkoutInput.ShippingAddressLine1} {checkoutInput.ShippingAddressLine2}",
+                city = checkoutInput.City,
+                state = checkoutInput.StateOrProvince,
+                zip = checkoutInput.ZipCode,
+                country = checkoutInput.Country
             };
             return address;
         }
