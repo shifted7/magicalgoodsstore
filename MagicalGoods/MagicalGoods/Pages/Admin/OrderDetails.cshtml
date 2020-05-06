@@ -1,0 +1,23 @@
+﻿@page
+@model MagicalGoods.Pages.Admin.OrderDetailsModel
+@{
+    Layout = "_Layout";
+}
+
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h1>Order Details</h1>
+        @foreach (var cartProduct in Model.Order.Cart.CartProducts)
+        {
+            <div class="col-md-10 d-flex flex justify-content-around align-items-center">
+                <h4>@cartProduct.Product.Name</h4>
+                <p>QTY: @cartProduct.Quantity</p>
+                <p>Sub-total: @(cartProduct.Product.Price * cartProduct.Quantity) Galleons</p>
+            </div>
+        }
+        <p>Total: @Model.Order.TotalPrice</p>
+    </body>
+    </html>

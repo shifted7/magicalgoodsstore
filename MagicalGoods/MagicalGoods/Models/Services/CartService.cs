@@ -1,5 +1,6 @@
 ﻿using MagicalGoods.Data;
 using MagicalGoods.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace MagicalGoods.Models.Services
             {
                 UserId = userId
             };
+
             _storeContext.Carts.Add(cart);
             await _storeContext.SaveChangesAsync();
             return cart;
@@ -28,7 +30,10 @@ namespace MagicalGoods.Models.Services
 
         public Cart GetCartByUserID(string userId)
         {
-            var result = _storeContext.Carts.FirstOrDefault(entry => entry.UserId == userId);
+            var result = _storeContext.Carts.Where(cart => cart.UserId == userId)
+                                            .Include(cart => cart.CartProducts)
+                                            .ThenInclude(cartProduct => cartProduct.Product)
+                                            .FirstOrDefault();
             return result;
         }
     }
