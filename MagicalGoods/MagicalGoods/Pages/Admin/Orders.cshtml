@@ -1,0 +1,29 @@
+﻿@page
+@model MagicalGoods.Pages.Admin.OrdersModel
+@{
+    Layout = "_Layout";
+}
+
+@*The name of the Customer
+The date of the order
+The total price of the order*@
+
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+    </head>
+    <body>
+        @foreach (var order in Model.Orders)
+        {
+        <a asp-page="/Admin/OrderDetails" asp-route-id="@order.ID">
+            <h1>ID: @order.ID</h1>
+            <p>@order.CustomerName</p>
+            <p>@order.DateOfOrder</p>
+            <p>@order.TotalPrice</p>
+            See Details
+        </a>
+
+        }
+
+    </body>
+    </html>
