@@ -9,6 +9,9 @@ using MagicalGoods.Data;
 using MagicalGoods.Models;
 using MagicalGoods.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace MagicalGoods.Controllers
 {
@@ -16,10 +19,14 @@ namespace MagicalGoods.Controllers
     public class AdministrationController : Controller
     {
         private readonly IProductManager _product;
+        public Blob Blob { get; set; }
 
-        public AdministrationController(IProductManager product)
+        [BindProperty]
+        public IFormFile Image { get; set; }
+        public AdministrationController(IProductManager product, IConfiguration configuration)
         {
             _product = product;
+            Blob = new Blob(configuration);
         }
 
         // GET: Admin
@@ -54,8 +61,24 @@ namespace MagicalGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Price,Description,Image")] Product product)
+        public async Task<IActionResult> Create([Bind("ID,Name,Price,Description")] Product product)
         {
+
+            var filePath = Path.GetTempFileName();
+            // stream io to save to file location
+            using (var stream = System.IO.File.Create(filePath))
+            {
+                await Image.CopyToAsync(stream);
+            }
+
+            // take the file at temp location to put into the blob storage
+            await Blob.UploadFile("products",Image.FileName, filePath);
+
+            // gets the blob from the storage, gives it an address
+            var blob = await Blob.GetBlob(Image.FileName, "products");
+            // sets the product img to the correct url
+            product.Image = blob.Uri.ToString();
+
             if (ModelState.IsValid)
             {
                 await _product.CreateProductAsync(product);
@@ -69,6 +92,7 @@ namespace MagicalGoods.Controllers
         {
 
             Product getProduct = await _product.GetProductByIdAsync(id);
+
             if (getProduct == null)
             {
                 return NotFound();
@@ -83,6 +107,22 @@ namespace MagicalGoods.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Price,Description,Image")] Product product)
         {
+
+            var filePath = Path.GetTempFileName();
+            // stream io to save to file location
+            using (var stream = System.IO.File.Create(filePath))
+            {
+                await Image.CopyToAsync(stream);
+            }
+
+            // take the file at temp location to put into the blob storage
+            await Blob.UploadFile("products", Image.FileName, filePath);
+
+            // gets the blob from the storage, gives it an address
+            var blob = await Blob.GetBlob(Image.FileName, "products");
+            // sets the product img to the correct url
+            product.Image = blob.Uri.ToString();
+
             if (id != product.ID)
             {
                 return NotFound();
