@@ -5,63 +5,71 @@
 }
 
     
-<h1>Checkout</h1>
+<h2 class="text-center">Checkout</h2>
 <main>
     <form method="post">
         <div class="d-flex justify-content-around">
-            <section class="card">
+            <section>
                 <h2>Please enter the following information:</h2>
                 <div asp-validation-summary="All"></div>
                 <label>First Name:</label>
-                <input asp-for="Input.FirstName" placeholder="Enter Text" />
-                <span asp-validation-for="Input.FirstName" span></span>
-
+                <div>
+                    <input asp-for="Input.FirstName" placeholder="Enter Text" />
+                    <span asp-validation-for="Input.FirstName" span></span>
+                </div>
                 <br />
                 <label>Last Name:</label>
-                <input asp-for="Input.LastName" placeholder="Enter Text" />
-                <span asp-validation-for="Input.LastName" span></span>
-
+                <div>
+                    <input asp-for="Input.LastName" placeholder="Enter Text" />
+                    <span asp-validation-for="Input.LastName" span></span>
+                </div>
                 <br />
                 <label>Shipping Address:</label>
-                <input asp-for="Input.ShippingAddressLine1" placeholder="Enter address line 1" />
-                <span asp-validation-for="Input.ShippingAddressLine1" span></span>
+                <div>
+                    <input asp-for="Input.ShippingAddressLine1" placeholder="Enter address line 1" />
+                    <span asp-validation-for="Input.ShippingAddressLine1" span></span>
 
-                <br />
-                <input asp-for="Input.ShippingAddressLine2" placeholder="Enter address line 2" />
-                <span asp-validation-for="Input.ShippingAddressLine2" span></span>
-
+                    <br />
+                    <input asp-for="Input.ShippingAddressLine2" placeholder="Enter address line 2" />
+                    <span asp-validation-for="Input.ShippingAddressLine2" span></span>
+                </div>
                 <br />
                 <label>City:</label>
-                <input asp-for="Input.City" placeholder="Enter Text" />
-                <span asp-validation-for="Input.City" span></span>
-
+                <div>
+                    <input asp-for="Input.City" placeholder="Enter Text" />
+                    <span asp-validation-for="Input.City" span></span>
+                </div>
                 <br />
                 <label>Zip Code:</label>
-                <input asp-for="Input.ZipCode" placeholder="Enter Text" />
-                <span asp-validation-for="Input.ZipCode" span></span>
-
+                <div>
+                    <input asp-for="Input.ZipCode" placeholder="Enter Text" />
+                    <span asp-validation-for="Input.ZipCode" span></span>
+                </div>
                 <label>State/Province:</label>
-                <input asp-for="Input.StateOrProvince" placeholder="Enter Text" />
-                <span asp-validation-for="Input.StateOrProvince" span></span>
-
+                <div>
+                    <input asp-for="Input.StateOrProvince" placeholder="Enter Text" />
+                    <span asp-validation-for="Input.StateOrProvince" span></span>
+                </div>
                 <br />
                 <label>Country:</label>
-                <input asp-for="Input.Country" placeholder="Enter Text" />
-                <span asp-validation-for="Input.Country" span></span>
-
+                <div>
+                    <input asp-for="Input.Country" placeholder="Enter Text" />
+                    <span asp-validation-for="Input.Country" span></span>
+                </div>
                 <br />
                 <label>Payment Type:</label>
-                <select asp-for="Input.Payment">
-                    <option value="4111111111111111">Visa</option>
-                    <option value="5424000000000015">MasterCard</option>
-                    <option value="370000000000002">American Express</option>
-                </select>
-                <span asp-validation-for="Input.Payment" span></span>
-
+                <div>
+                    <select asp-for="Input.Payment">
+                        <option value="4111111111111111">Visa</option>
+                        <option value="5424000000000015">MasterCard</option>
+                        <option value="370000000000002">American Express</option>
+                    </select>
+                    <span asp-validation-for="Input.Payment" span></span>
+                </div>
 
             </section>
-            <section class="card">
-                <h2>Cart:</h2>
+            <section class="card col-md-3">
+                <h3 class="text-center">Cart:</h3>
                 @foreach (var cartProduct in Model.CheckoutCartProducts)
                 {
                     <div>
@@ -74,7 +82,9 @@
                 <h4>Total: @Model.Total</h4>
             </section>
         </div>
-        <a asp-page="/Cart/Index" class="btn btn-secondary">Return to Cart</a>
-        <button asp-page="/Checkout/Payment" class="btn btn-success">Complete Checkout</button>
+        <section class="d-flex justify-content-center">
+            <a asp-page="/Cart/Index" class="btn btn-secondary">Return to Cart</a>
+            <button asp-page="/Checkout/Payment" class="btn btn-success">Complete Checkout</button>
+        </section>
     </form>
 </main>

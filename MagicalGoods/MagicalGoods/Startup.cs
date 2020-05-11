@@ -75,9 +75,9 @@ namespace MagicalGoods
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            serviceProvider.GetService<ApplicationDbContext>().Database.EnsureCreated();
             RoleInitializer.SeedData(serviceProvider);
             app.UseStaticFiles();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
