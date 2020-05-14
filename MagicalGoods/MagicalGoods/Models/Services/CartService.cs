@@ -36,5 +36,19 @@ namespace MagicalGoods.Models.Services
                                             .FirstOrDefault();
             return result;
         }
+
+        public async Task RemoveCartByID(int cartId)
+        {
+            Cart cartToDelete = await _storeContext.Carts.FindAsync(cartId);
+            _storeContext.Remove(cartToDelete);
+            await _storeContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveCartFromUser(int cartId)
+        {
+            Cart cartToRemoveFromUser = await _storeContext.Carts.FindAsync(cartId);
+            cartToRemoveFromUser.UserId = null;
+            await _storeContext.SaveChangesAsync();
+        }
     }
 }
