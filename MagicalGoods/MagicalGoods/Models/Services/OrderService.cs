@@ -31,7 +31,10 @@ namespace MagicalGoods.Models.Services
 
         public async Task<List<Order>> GetAllOrders()
         {
-            List<Order> orders = await _storeContext.Orders.ToListAsync();
+            List<Order> orders = await _storeContext.Orders.Include(order => order.Cart)
+                                                            .ThenInclude(cart => cart.CartProducts)
+                                                            .ThenInclude(cartProduct => cartProduct.Product)
+                                                            .ToListAsync();
             return orders;
         }
 

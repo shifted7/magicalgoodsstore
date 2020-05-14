@@ -71,6 +71,9 @@ namespace MagicalGoods.Pages.Checkout
 
             await _emailSender.SendEmailAsync(userName, "Receipt", sb.ToString());
 
+
+            await _cart.RemoveCartFromUser(cart.ID);
+
             await _cart.AddCartToUser(userId);
 
             return RedirectToPage("/Checkout/Receipt");

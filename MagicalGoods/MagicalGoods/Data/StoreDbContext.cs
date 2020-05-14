@@ -16,6 +16,8 @@ namespace MagicalGoods.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
             modelBuilder.Entity<Product>().HasData(
                     new Product
                     {
