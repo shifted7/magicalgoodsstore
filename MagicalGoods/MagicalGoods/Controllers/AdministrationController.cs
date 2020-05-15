@@ -22,9 +22,6 @@ namespace MagicalGoods.Controllers
         private readonly IProductManager _product;
         public Blob Blob { get; set; }
 
-        [BindProperty]
-        public IFormFile ImageFile { get; set; }
-        public Product Product { get; set; }
         public AdministrationController(IProductManager product, IConfiguration configuration)
         {
             _product = product;
@@ -63,32 +60,31 @@ namespace MagicalGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Price,Description,Image")] Product product)
+        public async Task<IActionResult> Create([Bind("Product, ImageFile")] ProductData formData)
         {
 
             var filePath = Path.GetTempFileName();
             // stream io to save to file location
             using (var stream = System.IO.File.Create(filePath))
             {
-                await ImageFile.CopyToAsync(stream);
+                await formData.ImageFile.CopyToAsync(stream);
             }
 
             // take the file at temp location to put into the blob storage
-            await Blob.UploadFile("products", ImageFile.FileName, filePath);
+            await Blob.UploadFile("products", formData.ImageFile.FileName, filePath);
 
             // gets the blob from the storage, gives it an address
-            var blob = await Blob.GetBlob(ImageFile.FileName, "products");
+            var blob = await Blob.GetBlob(formData.ImageFile.FileName, "products");
             // sets the product img to the correct url
-            product.Image = blob.Uri.ToString();
+            formData.Product.Image = blob.Uri.ToString();
 
             if (ModelState.IsValid)
             {
-                await _product.CreateProductAsync(product);
+                await _product.CreateProductAsync(formData.Product);
                 return RedirectToAction(nameof(Index));
             }
-            ProductData newData = new ProductData();
-            newData.Product = product;
-            return View(newData);
+
+            return View(formData);
         }
 
         // GET: Admin/Edit/5
@@ -102,7 +98,6 @@ namespace MagicalGoods.Controllers
                 return NotFound();
             }
 
-            Product = getProduct;
             ProductData newData = new ProductData();
             newData.Product = getProduct;
             return View(newData);
@@ -135,7 +130,6 @@ namespace MagicalGoods.Controllers
         public async Task<IActionResult> UploadImage([Bind("Product, ImageFile")] ProductData formData)
         {
 
-            ImageFile = formData.ImageFile;
             if (formData.ImageFile != null)
             {
                 var filePath = Path.GetTempFileName();
