@@ -38,7 +38,7 @@ namespace MagicalGoods.Pages.Checkout
             string userName = _userManager.GetUserName(User);
             CartProducts = await _cartProduct.GetAllProductsForCart(userId);
             decimal totalPrice = 0;
-            var cart = _cart.GetCartByUserID(userId);
+            var cart = await _cart.GetCartByUserID(userId);
 
             var order = new MagicalGoods.Models.Order()
             {

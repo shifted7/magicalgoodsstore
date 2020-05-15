@@ -259,7 +259,7 @@ namespace MagicalGoodsTests
 
                 Cart addedCart = await cs.AddCartToUser("1");
 
-                var result = cs.GetCartByUserID("1");
+                var result = await cs.GetCartByUserID("1");
 
                 Assert.Equal("1", result.UserId);
             };

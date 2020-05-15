@@ -28,8 +28,16 @@ namespace MagicalGoods.Models.Services
             return cart;
         }
 
-        public Cart GetCartByUserID(string userId)
+        public async Task<Cart> GetCartByUserID(string userId)
         {
+            var cart = _storeContext.Carts.Where(cart => cart.UserId == userId)
+                                          .FirstOrDefault();
+
+            if (cart == null)
+            {
+                await AddCartToUser(userId);
+            }
+
             var result = _storeContext.Carts.Where(cart => cart.UserId == userId)
                                             .Include(cart => cart.CartProducts)
                                             .ThenInclude(cartProduct => cartProduct.Product)

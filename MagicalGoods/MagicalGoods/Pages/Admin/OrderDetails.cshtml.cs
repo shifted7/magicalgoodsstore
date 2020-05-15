@@ -34,7 +34,7 @@ namespace MagicalGoods.Pages.Admin
             if (Order.Cart == null)
             {
                 var userId = _userManager.GetUserId(User);
-                var cart = _cart.GetCartByUserID(userId);
+                var cart = await _cart.GetCartByUserID(userId);
                 Order.Cart = cart;
             }
             return Page();

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using MagicalGoods.ViewModels;
 
 namespace MagicalGoods.Controllers
 {
@@ -22,7 +23,8 @@ namespace MagicalGoods.Controllers
         public Blob Blob { get; set; }
 
         [BindProperty]
-        public IFormFile Image { get; set; }
+        public IFormFile ImageFile { get; set; }
+        public Product Product { get; set; }
         public AdministrationController(IProductManager product, IConfiguration configuration)
         {
             _product = product;
@@ -68,14 +70,14 @@ namespace MagicalGoods.Controllers
             // stream io to save to file location
             using (var stream = System.IO.File.Create(filePath))
             {
-                await Image.CopyToAsync(stream);
+                await ImageFile.CopyToAsync(stream);
             }
 
             // take the file at temp location to put into the blob storage
-            await Blob.UploadFile("products",Image.FileName, filePath);
+            await Blob.UploadFile("products", ImageFile.FileName, filePath);
 
             // gets the blob from the storage, gives it an address
-            var blob = await Blob.GetBlob(Image.FileName, "products");
+            var blob = await Blob.GetBlob(ImageFile.FileName, "products");
             // sets the product img to the correct url
             product.Image = blob.Uri.ToString();
 
@@ -84,7 +86,9 @@ namespace MagicalGoods.Controllers
                 await _product.CreateProductAsync(product);
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            ProductData newData = new ProductData();
+            newData.Product = product;
+            return View(newData);
         }
 
         // GET: Admin/Edit/5
@@ -97,7 +101,11 @@ namespace MagicalGoods.Controllers
             {
                 return NotFound();
             }
-            return View(getProduct);
+
+            Product = getProduct;
+            ProductData newData = new ProductData();
+            newData.Product = getProduct;
+            return View(newData);
         }
 
         // POST: Admin/Edit/5
@@ -112,31 +120,47 @@ namespace MagicalGoods.Controllers
                 return NotFound();
             }
 
-            if (Image!= null)
-            {
-                var filePath = Path.GetTempFileName();
-                // stream io to save to file location
-                using (var stream = System.IO.File.Create(filePath))
-                {
-                    await Image.CopyToAsync(stream);
-                }
-
-                // take the file at temp location to put into the blob storage
-                await Blob.UploadFile("products", Image.FileName, filePath);
-
-                // gets the blob from the storage, gives it an address
-                var blob = await Blob.GetBlob(Image.FileName, "products");
-                // sets the product img to the correct url
-                product.Image = blob.Uri.ToString();
-
-            }
-
             if (ModelState.IsValid)
             {
                 await _product.UpdateProductAsync(product);
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            ProductData newData = new ProductData();
+            newData.Product = product;
+            return View(newData);
+        }
+
+        //post to upload img
+        [HttpPost, ActionName("uploadImage")]
+        public async Task<IActionResult> UploadImage([Bind("Product, ImageFile")] ProductData formData)
+        {
+
+            ImageFile = formData.ImageFile;
+            if (formData.ImageFile != null)
+            {
+                var filePath = Path.GetTempFileName();
+                // stream io to save to file location
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    await formData.ImageFile.CopyToAsync(stream);
+                }
+
+                // take the file at temp location to put into the blob storage
+                await Blob.UploadFile("products", formData.ImageFile.FileName, filePath);
+
+                // gets the blob from the storage, gives it an address
+                var blob = await Blob.GetBlob(formData.ImageFile.FileName, "products");
+                // sets the product img to the correct url
+                formData.Product.Image = blob.Uri.ToString();
+
+                if (ModelState.IsValid)
+                {
+                    await _product.UpdateProductAsync(formData.Product);
+                }
+
+            }
+            return RedirectToAction("Edit", new {id = formData.Product.ID});
+
         }
 
         // GET: Admin/Delete/5

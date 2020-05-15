@@ -13,11 +13,13 @@ namespace MagicalGoods.Models.Services
     {
         private readonly StoreDbContext _storeContext;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ICartManager _cartService;
 
-        public CartProductService(StoreDbContext storeContext, UserManager<ApplicationUser> userManager)
+        public CartProductService(StoreDbContext storeContext, UserManager<ApplicationUser> userManager, ICartManager cartService)
         {
             _storeContext = storeContext;
             _userManager = userManager;
+            _cartService = cartService;
         }
         public async Task AddProductToCart(CartProduct cartProduct)
         {
@@ -60,16 +62,17 @@ namespace MagicalGoods.Models.Services
 
             // TODO: ADd Logic to if the cart doesn't exist...then create one for them (fail safe)
             var userCart = await _storeContext.Carts.FirstOrDefaultAsync(entry => entry.UserId == userId);
-            if (userCart != null)
+
+            if (userCart == null)
             {
-                var cartProducts = await _storeContext.CartProducts
-                .Where(cartProduct => cartProduct.CartID == userCart.ID)
-                .Include(cartProduct => cartProduct.Product)
-                .ToListAsync();
-                return cartProducts;
+                await _cartService.AddCartToUser(userId);
             }
 
-            return null;
+            var cartProducts = await _storeContext.CartProducts
+            .Where(cartProduct => cartProduct.CartID == userCart.ID)
+            .Include(cartProduct => cartProduct.Product)
+            .ToListAsync();
+            return cartProducts;
            
         }
 
