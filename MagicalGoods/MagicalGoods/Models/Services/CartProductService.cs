@@ -13,16 +13,44 @@ namespace MagicalGoods.Models.Services
     {
         private readonly StoreDbContext _storeContext;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ICartManager _cartService;
 
-        public CartProductService(StoreDbContext storeContext, UserManager<ApplicationUser> userManager)
+        public CartProductService(StoreDbContext storeContext, UserManager<ApplicationUser> userManager, ICartManager cartService)
         {
             _storeContext = storeContext;
             _userManager = userManager;
+            _cartService = cartService;
         }
         public async Task AddProductToCart(CartProduct cartProduct)
         {
+            var cartProducts = await GetAllProductsForCartById(cartProduct.CartID);
+
+            foreach (var cartItem in cartProducts)
+            {
+                if (cartItem.ProductID == cartProduct.ProductID)
+                {
+                    await UpdateProductQuantity(cartItem.ID, cartItem.Quantity + cartProduct.Quantity);
+                    return;
+                }
+            }
+
             _storeContext.Add(cartProduct);
             await _storeContext.SaveChangesAsync();
+
+        }
+
+        public async Task<List<CartProduct>> GetAllProductsForCartById (int cartId)
+        {
+            var cart = await _storeContext.Carts.FirstOrDefaultAsync(entry => entry.ID == cartId);
+            if (cart != null)
+            {
+                var cartProducts = await _storeContext.CartProducts
+                .Where(cartProduct => cartProduct.CartID == cart.ID)
+                .Include(cartProduct => cartProduct.Product)
+                .ToListAsync();
+                return cartProducts;
+            }
+            return null;
         }
 
         public async Task<List<CartProduct>> GetAllProductsForCart(string userId)
@@ -31,12 +59,21 @@ namespace MagicalGoods.Models.Services
             {
                 return null;
             }
+
+            // TODO: ADd Logic to if the cart doesn't exist...then create one for them (fail safe)
             var userCart = await _storeContext.Carts.FirstOrDefaultAsync(entry => entry.UserId == userId);
+
+            if (userCart == null)
+            {
+                await _cartService.AddCartToUser(userId);
+            }
+
             var cartProducts = await _storeContext.CartProducts
-                .Where(cartProduct => cartProduct.CartID == userCart.ID)
-                .Include(cartProduct => cartProduct.Product)
-                .ToListAsync();                                 
+            .Where(cartProduct => cartProduct.CartID == userCart.ID)
+            .Include(cartProduct => cartProduct.Product)
+            .ToListAsync();
             return cartProducts;
+           
         }
 
         public async Task<CartProduct> GetCartProductById(int cartProductId)

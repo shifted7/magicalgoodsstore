@@ -8,7 +8,7 @@ namespace MagicalGoods.Models.Interfaces
     public interface ICartManager
     {
         public Task<Cart> AddCartToUser(string userId);
-        public Cart GetCartByUserID(string userId);
+        public Task<Cart> GetCartByUserID(string userId);
 
         public Task RemoveCartByID(int cartId);
 
