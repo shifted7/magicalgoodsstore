@@ -71,6 +71,10 @@ namespace MagicalGoods
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/api/error");
+            }
 
             app.UseRouting();
             app.UseAuthentication();
