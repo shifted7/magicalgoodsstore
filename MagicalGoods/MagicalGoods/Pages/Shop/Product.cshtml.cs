@@ -50,7 +50,8 @@ namespace MagicalGoods.Pages.Shop
             {
                 return RedirectToPage("/Account/Login");
             }
-            int cartId = _cartService.GetCartByUserID(userId).ID;
+            var result = await _cartService.GetCartByUserID(userId);
+            int cartId = result.ID;
 
             CartProduct cartProduct = new CartProduct()
             {

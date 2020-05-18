@@ -3,8 +3,9 @@
     "",
     "\\MagicalGoods",
     "\\MagicalGoods\\MagicalGoods",
-    "\\MagicalGoods\\MagicalGoods\\Pages"
+    "\\MagicalGoods\\MagicalGoods\\wwwroot",
+    "\\MagicalGoods\\MagicalGoods\\wwwroot\\img"
   ],
-  "SelectedNode": "\\MagicalGoods\\MagicalGoods\\Startup.cs",
+  "SelectedNode": "\\MagicalGoods\\README.md",
   "PreviewInSolutionExplorer": false
 }

@@ -39,6 +39,8 @@ namespace MagicalGoods
             services.AddTransient<ICartManager, CartService>();
             services.AddTransient<ICartProductManager, CartProductService>();
             services.AddTransient<IEmailSender, EmailSenderService>();
+            services.AddTransient<IPaymentManager, PaymentService>();
+            services.AddTransient<IOrderManager, OrderService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -69,13 +71,16 @@ namespace MagicalGoods
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/api/error");
+            }
 
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
             RoleInitializer.SeedData(serviceProvider);
             app.UseStaticFiles();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();

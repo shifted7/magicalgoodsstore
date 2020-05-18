@@ -9,6 +9,10 @@ using MagicalGoods.Data;
 using MagicalGoods.Models;
 using MagicalGoods.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using MagicalGoods.ViewModels;
 
 namespace MagicalGoods.Controllers
 {
@@ -16,10 +20,12 @@ namespace MagicalGoods.Controllers
     public class AdministrationController : Controller
     {
         private readonly IProductManager _product;
+        public Blob Blob { get; set; }
 
-        public AdministrationController(IProductManager product)
+        public AdministrationController(IProductManager product, IConfiguration configuration)
         {
             _product = product;
+            Blob = new Blob(configuration);
         }
 
         // GET: Admin
@@ -54,14 +60,31 @@ namespace MagicalGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Price,Description,Image")] Product product)
+        public async Task<IActionResult> Create([Bind("Product, ImageFile")] ProductData formData)
         {
+
+            var filePath = Path.GetTempFileName();
+            // stream io to save to file location
+            using (var stream = System.IO.File.Create(filePath))
+            {
+                await formData.ImageFile.CopyToAsync(stream);
+            }
+
+            // take the file at temp location to put into the blob storage
+            await Blob.UploadFile("products", formData.ImageFile.FileName, filePath);
+
+            // gets the blob from the storage, gives it an address
+            var blob = await Blob.GetBlob(formData.ImageFile.FileName, "products");
+            // sets the product img to the correct url
+            formData.Product.Image = blob.Uri.ToString();
+
             if (ModelState.IsValid)
             {
-                await _product.CreateProductAsync(product);
+                await _product.CreateProductAsync(formData.Product);
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+
+            return View(formData);
         }
 
         // GET: Admin/Edit/5
@@ -69,11 +92,15 @@ namespace MagicalGoods.Controllers
         {
 
             Product getProduct = await _product.GetProductByIdAsync(id);
+
             if (getProduct == null)
             {
                 return NotFound();
             }
-            return View(getProduct);
+
+            ProductData newData = new ProductData();
+            newData.Product = getProduct;
+            return View(newData);
         }
 
         // POST: Admin/Edit/5
@@ -93,7 +120,41 @@ namespace MagicalGoods.Controllers
                 await _product.UpdateProductAsync(product);
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            ProductData newData = new ProductData();
+            newData.Product = product;
+            return View(newData);
+        }
+
+        //post to upload img
+        [HttpPost, ActionName("uploadImage")]
+        public async Task<IActionResult> UploadImage([Bind("Product, ImageFile")] ProductData formData)
+        {
+
+            if (formData.ImageFile != null)
+            {
+                var filePath = Path.GetTempFileName();
+                // stream io to save to file location
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    await formData.ImageFile.CopyToAsync(stream);
+                }
+
+                // take the file at temp location to put into the blob storage
+                await Blob.UploadFile("products", formData.ImageFile.FileName, filePath);
+
+                // gets the blob from the storage, gives it an address
+                var blob = await Blob.GetBlob(formData.ImageFile.FileName, "products");
+                // sets the product img to the correct url
+                formData.Product.Image = blob.Uri.ToString();
+
+                if (ModelState.IsValid)
+                {
+                    await _product.UpdateProductAsync(formData.Product);
+                }
+
+            }
+            return RedirectToAction("Edit", new {id = formData.Product.ID});
+
         }
 
         // GET: Admin/Delete/5

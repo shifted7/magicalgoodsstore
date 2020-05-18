@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using MagicalGoods.Models;
+using MagicalGoods.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,6 +18,7 @@ namespace MagicalGoods.Pages.Account
         /// </summary>
         private SignInManager<ApplicationUser> _signIn;
         private UserManager<ApplicationUser> _userManager;
+        private ICartManager _cart;
 
         [BindProperty]
         public LoginViewModel Input { get; set; }
@@ -25,10 +27,11 @@ namespace MagicalGoods.Pages.Account
         /// brings in the application model into the signinmanager library 
         /// </summary>
         /// <param name="signIn"></param>
-        public LoginModel(SignInManager<ApplicationUser> signIn, UserManager<ApplicationUser> userManager)
+        public LoginModel(SignInManager<ApplicationUser> signIn, UserManager<ApplicationUser> userManager, ICartManager cart)
         {
             _signIn = signIn;
             _userManager = userManager;
+            _cart = cart;
         }
 
         public void OnGet()
@@ -49,6 +52,13 @@ namespace MagicalGoods.Pages.Account
                 if (result.Succeeded)
                 {
                     ApplicationUser user = await _userManager.FindByEmailAsync(Input.Email);
+
+                    var cart = _cart.GetCartByUserID(user.Id);
+
+                    if (cart == null)
+                    {
+                        await _cart.AddCartToUser(user.Id);
+                    }
                    
                     if (await _userManager.IsInRoleAsync(user, "Admin"))
                     {
