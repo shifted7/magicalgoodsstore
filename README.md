@@ -97,6 +97,7 @@ Unit testing is included in the MagicalGoods/Magical project using the xUnit tes
 ---
 ## Data Flow (Frontend, Backend, REST API)
 The data is inputted in the front-end view by the user, and is posted to a route in that front-end. The front-end then calls the necessary back-end service, and sends it the necessary data for its function. The backend service takes the data and updates the database as necessary.
+
 ![Data Flow Diagram](/assets/Flowchart.png)
 
 ---
@@ -106,6 +107,7 @@ The data is inputted in the front-end view by the user, and is posted to a route
 Our store database has a schema as follows: we have tables for carts, cartproducts, products and orders. The Carts table has columns for ID and the userID. The CartProducts table has columns for ID, CartID, product, and quantity. The Products table has columns for ID, name of the product, price per item, description of the product, and a url for the image of the product. The Orders table has columns for ID, customer name, date of the order, total price, and cart ID. 
 
 Our user database is implemented according to the default schema of Identity.
+
 ![Database Schema](/assets/ERD.png)
 
 ---
@@ -153,14 +155,23 @@ Our user database is implemented according to the default schema of Identity.
 
 ## Change Log  
 2.1: *Fixed bugs* 17 May 2020
+
 2.0: *Added Authorize.Net for payments, blob storage for images, updated styling and admin orders page for reviewing past orders* 10 May 2020
+
 1.9: *Added administrator functions, receipt page, basket, and reworked styling* - 03 May 2020  
+
 1.7: *Added some CSS for all pages* - 26 April 2020  
+
 1.6: *When user clicks on an item from the shop page, they are redirected to see a page with the details of the clicked product* - 23 April 2020  
+
 1.5: *When user clicks on an item from the shop page, they are redirected to see a page with the details of the clicked product* - 23 April 2020  
+
 1.4: *Created a logout page. When user logs in, they are redirected to the shop page to see a list of all products* - 22 April 2020  
+
 1.3: *Created interface/service for CRUD for our products, seeded the database* - 21 April 2020  
+
 1.2: *Added a register and login page* - 21 April 2020  
+
 1.1: *Scaffolded basic structure for application* - 20 April 2020  
 
 ---
