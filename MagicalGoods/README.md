@@ -6,6 +6,8 @@
 
 Deployed: https://magicalgoodsstore.azurewebsites.net/
 
+Vulnerability Report: [Report](/MagicalGoods/vulnerability-report.md)
+
 ---
 ## Web Application
 Our E-Commerce C# web application allows users to browse and purchase magical items. The app sends users an email on account creation as well as sending a receipt when checking out. On our register page, using Identity, we are grabbing our claims for our first name and last name to used to display it across our pages as well as having better security.  Administrators can access an administrator panel, product overview, and pages to add, edit, and delete products.  
@@ -72,14 +74,20 @@ Unit testing is included in the MagicalGoods/Magical project using the xUnit tes
 ### Product By ID
 ![Register](\MagicalGoods\wwwroot\img\product-page.png)
 
-### Receipt 
-![Register](\MagicalGoods\wwwroot\img\receipt.png)
-
 ### Login
 ![Login](\MagicalGoods\wwwroot\img\login.png)
 
 ### Register
 ![Register](\MagicalGoods\wwwroot\img\register.png)
+
+### Cart Page
+![Cart](\MagicalGoods\wwwroot\img\cart.png)
+
+### Checkout
+![Checkout](\MagicalGoods\wwwroot\img\checkout.png)
+
+### Receipt 
+![Register](\MagicalGoods\wwwroot\img\receipt.png)
 
 ### Admin
 ![Register](\MagicalGoods\wwwroot\img\admin.png)
