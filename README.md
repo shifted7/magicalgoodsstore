@@ -6,7 +6,7 @@
 
 Deployed: https://magicalgoodsstore.azurewebsites.net/
 
-Vulnerability Report: [Report](/MagicalGoods/vulnerability-report.md)
+Vulnerability Report: [Report](vulnerability-report.md)
 
 ---
 ## Web Application
@@ -65,34 +65,34 @@ Unit testing is included in the MagicalGoods/Magical project using the xUnit tes
 ## Visuals
 
 ### Home Page
-![Home Page](\MagicalGoods\wwwroot\img\home-page.png)
+![Home Page](/assets/home-page.png)
 
 ### Shop Page
-![Shop Page](\MagicalGoods\wwwroot\img\shop.png)
+![Shop Page](/assets/shop.png)
 
 ### Product By ID
-![Register](\MagicalGoods\wwwroot\img\product-page.png)
+![Register](/assets/product-page.png)
 
 ### Login
-![Login](\MagicalGoods\wwwroot\img\login.png)
+![Login](/assets/login.png)
 
 ### Register
-![Register](\MagicalGoods\wwwroot\img\register.png)
+![Register](/assets/register.png)
 
 ### Cart Page
-![Cart](\MagicalGoods\wwwroot\img\cart.png)
+![Cart](/assets/cart.png)
 
 ### Checkout
-![Checkout](\MagicalGoods\wwwroot\img\checkout.png)
+![Checkout](/assets/checkout.png)
 
 ### Receipt 
-![Register](\MagicalGoods\wwwroot\img\receipt.png)
+![Register](/assets/receipt.png)
 
 ### Admin
-![Register](\MagicalGoods\wwwroot\img\admin.png)
+![Register](/assets/admin.png)
 
 ### Admin Overview
-![Register](\MagicalGoods\wwwroot\img\admin-overview.png)
+![Register](/assets/admin-overview.png)
 
 ---
 ## Data Flow (Frontend, Backend, REST API)
