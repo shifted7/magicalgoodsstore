@@ -31,12 +31,20 @@ namespace MagicalGoods.Pages.Checkout
 
         public IActionResult OnPost()
         {
-            result = _paymentService.Run(Input);
-            if(result == "Response recieved.")
+            if (ModelState.IsValid)
             {
-                return RedirectToPage("/Checkout/Order");
+                result = _paymentService.Run(Input);
+                if(result == "Response recieved.")
+                {
+                    return RedirectToPage("/Checkout/Order");
+                }
+                return Page();
             }
-            return Page();
+            //foreach (var error in result.Errors)
+            //{
+            //    ModelState.AddModelError(string.Empty, error.Description);
+            //}
+            return RedirectToPage("/Checkout/Index");
         }
 
         public class CheckoutInput

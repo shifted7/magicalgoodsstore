@@ -12,13 +12,11 @@ namespace MagicalGoods.Models.Services
     public class CartProductService : ICartProductManager
     {
         private readonly StoreDbContext _storeContext;
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ICartManager _cartService;
 
-        public CartProductService(StoreDbContext storeContext, UserManager<ApplicationUser> userManager, ICartManager cartService)
+        public CartProductService(StoreDbContext storeContext, ICartManager cartService)
         {
             _storeContext = storeContext;
-            _userManager = userManager;
             _cartService = cartService;
         }
         public async Task AddProductToCart(CartProduct cartProduct)

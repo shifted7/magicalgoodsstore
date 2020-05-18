@@ -28,7 +28,7 @@ namespace MagicalGoods.Pages.Checkout
         public async Task<IActionResult> OnGet()
         {
             string userId = _userManager.GetUserId(User);
-            if (userId.Length > 0)
+            if (userId != null && userId.Length > 0)
             {
                 var allOrders = await _orderManager.GetAllOrders();
 

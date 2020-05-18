@@ -31,14 +31,7 @@ namespace MagicalGoods.Pages.Admin
         public async Task<IActionResult> OnGet(int id)
         {
             Order = await _orderManager.GetOrderByID(id);
-            if (Order.Cart == null)
-            {
-                var userId = _userManager.GetUserId(User);
-                var cart = await _cart.GetCartByUserID(userId);
-                Order.Cart = cart;
-            }
             return Page();
-
         }
     }
 }

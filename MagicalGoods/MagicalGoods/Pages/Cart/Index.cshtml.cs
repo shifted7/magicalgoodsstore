@@ -25,7 +25,7 @@ namespace MagicalGoods.Pages.Cart
         public async Task<IActionResult> OnGet()
         {
             string userId = _userManager.GetUserId(User);
-            if (userId.Length > 0)
+            if (userId != null && userId.Length > 0)
             {
                 UserCartProducts = await _cartProductService.GetAllProductsForCart(userId);
 
