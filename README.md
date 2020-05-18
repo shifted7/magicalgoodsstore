@@ -10,7 +10,7 @@ Vulnerability Report: [Report](vulnerability-report.md)
 
 ---
 ## Web Application
-Our E-Commerce C# web application allows users to browse and purchase magical items. The app sends users an email on account creation as well as sending a receipt when checking out. On our register page, using Identity, we are grabbing our claims for our first name and last name to used to display it across our pages as well as having better security.  Administrators can access an administrator panel, product overview, and pages to add, edit, and delete products.  Users can add items to their cart, and perform a mock checkout via Authorize.Net. Product images are stored in Azure Blob Storage.
+Our E-Commerce C# web application allows users to browse and purchase magical items. The app sends users an email via sendgrid on account creation as well as sending a receipt when checking out. On our register page, using Identity, we are grabbing our claims for our first name and last name to used to display it across our pages as well as having better security.  Administrators can access an administrator panel, product overview, and pages to add, edit, and delete products.  Users can add items to their cart, and perform a mock checkout via Authorize.Net. Product images are stored in Azure Blob Storage.
 
 ---
 ### Identity Claims
@@ -30,25 +30,27 @@ Microsoft Visual Studio Community 2019
 - Bootstrap
 - Azure
 - Identity
-
+- Sendgrid
+- Authorize.Net
+- Azure Blob Storage
 
 ---
 ## Getting Started
 
-**Get access:**  
+**Get access to Azure repo (optional):**  
 Email areyes986@gmail.com or andrewbc.dev@outlook.com to ask for an invite to the azure organization.  
 
 Clone this repository to your local machine.
 
 ```
-$ git clone https://AndrewAllyOrg@dev.azure.com/AndrewAllyOrg/E-Commerce/_git/MagicalGoods
+$ git clone https://github.com/shifted7/magicalgoodsstore.git
 ```
 Once downloaded, you can either use the dotnet CLI utilities or Visual Studio 2017 (or greater) to build the web application. The solution file is located in the MagicalGoods subdirectory at the root of the repository.
 ```
-cd MagicalGoods/MagicalGoods
+cd MagicalGoods
 dotnet build
 ```
-The dotnet tools will automatically restore any NuGet dependencies. Before running the application, the provided code-first migration will need to be applied to the SQL server of your choice configured in a /MagicalGoods/MagicalGoods/appsettings.json file. This requires the Microsoft.EntityFrameworkCore.Tools NuGet package and can be run from the NuGet Package Manager Console:
+The dotnet tools will automatically restore any NuGet dependencies. Before running the application, the provided code-first migration will need to be applied to the SQL server of your choice configured in a /MagicalGoods/appsettings.json file. This requires the Microsoft.EntityFrameworkCore.Tools NuGet package and can be run from the NuGet Package Manager Console:
 ```
 Update-Database
 ```
