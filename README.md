@@ -10,9 +10,8 @@ Vulnerability Report: [Report](vulnerability-report.md)
 
 ---
 ## Web Application
-Our E-Commerce C# web application allows users to browse and purchase magical items. The app sends users an email on account creation as well as sending a receipt when checking out. On our register page, using Identity, we are grabbing our claims for our first name and last name to used to display it across our pages as well as having better security.  Administrators can access an administrator panel, product overview, and pages to add, edit, and delete products.  
+Our E-Commerce C# web application allows users to browse and purchase magical items. The app sends users an email on account creation as well as sending a receipt when checking out. On our register page, using Identity, we are grabbing our claims for our first name and last name to used to display it across our pages as well as having better security.  Administrators can access an administrator panel, product overview, and pages to add, edit, and delete products.  Users can add items to their cart, and perform a mock checkout via Authorize.Net. Product images are stored in Azure Blob Storage.
 
-Claims: first and last name.
 ---
 ### Identity Claims
 - First Name, Last Name  
