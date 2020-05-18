@@ -16,6 +16,12 @@ namespace MagicalGoods.Models.Services
         {
             _storeContext = storeContext;
         }
+
+        /// <summary>
+        /// Adds a new empty cart to the user with the given userId
+        /// </summary>
+        /// <param name="userId">The ID of the user</param>
+        /// <returns>Resulting new cart</returns>
         public async Task<Cart> AddCartToUser(string userId)
         {
             Cart cart = new Cart()
@@ -28,6 +34,11 @@ namespace MagicalGoods.Models.Services
             return cart;
         }
 
+        /// <summary>
+        /// Gets the current cart of the user with the given userId from the database
+        /// </summary>
+        /// <param name="userId">The ID of the user</param>
+        /// <returns>Resulting cart</returns>
         public async Task<Cart> GetCartByUserID(string userId)
         {
             var cart = _storeContext.Carts.Where(cart => cart.UserId == userId)
@@ -45,6 +56,11 @@ namespace MagicalGoods.Models.Services
             return result;
         }
 
+        /// <summary>
+        /// Deletes the cart with the given cartId from the database
+        /// </summary>
+        /// <param name="cartId">The ID of the cart to delete</param>
+        /// <returns>Task result</returns>
         public async Task RemoveCartByID(int cartId)
         {
             Cart cartToDelete = await _storeContext.Carts.FindAsync(cartId);
@@ -52,6 +68,11 @@ namespace MagicalGoods.Models.Services
             await _storeContext.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Unassigns the cart with the given cartId from its user in the database
+        /// </summary>
+        /// <param name="cartId">The ID of the cart to unassign</param>
+        /// <returns>Task result</returns>
         public async Task RemoveCartFromUser(int cartId)
         {
             Cart cartToRemoveFromUser = await _storeContext.Carts.FindAsync(cartId);
