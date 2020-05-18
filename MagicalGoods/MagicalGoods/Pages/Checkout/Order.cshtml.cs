@@ -35,6 +35,10 @@ namespace MagicalGoods.Pages.Checkout
         public async Task<IActionResult> OnGet()
         {
             var userId = _userManager.GetUserId(User);
+            if(userId == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
             string userName = _userManager.GetUserName(User);
             CartProducts = await _cartProduct.GetAllProductsForCart(userId);
             decimal totalPrice = 0;
@@ -51,31 +55,23 @@ namespace MagicalGoods.Pages.Checkout
             await _orderManager.CreateOrder(order);
 
             StringBuilder sb = new StringBuilder();
-
             sb.AppendLine("<h1> Your order is on the way! </h1>");
-
             foreach (var cartProduct in CartProducts)
             {
                 sb.AppendLine($"<h2>{cartProduct.Product.Name}</h2>");
                 sb.AppendLine($"<p>Quantity: {cartProduct.Quantity}</p>");
                 sb.AppendLine($"<p>Price: {cartProduct.Product.Price * cartProduct.Quantity}</p>");
             }
-
             foreach (var cartProduct in CartProducts)
             {
                 totalPrice += cartProduct.Product.Price * cartProduct.Quantity;
             }
             order.TotalPrice = totalPrice;
-
             sb.AppendLine($"<a href='https://magicalgoodsstore.azurewebsites.net/'>Shop Some more!</a>");
 
             await _emailSender.SendEmailAsync(userName, "Receipt", sb.ToString());
-
-
             await _cart.RemoveCartFromUser(cart.ID);
-
             await _cart.AddCartToUser(userId);
-
             return RedirectToPage("/Checkout/Receipt");
         }
     }

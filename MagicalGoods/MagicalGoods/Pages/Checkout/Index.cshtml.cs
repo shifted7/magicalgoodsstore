@@ -8,7 +8,6 @@ using MagicalGoods.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using static MagicalGoods.Pages.Account.RegisterModel;
 using static MagicalGoods.Pages.Checkout.PaymentModel;
 
 namespace MagicalGoods.Pages.Checkout
@@ -38,7 +37,10 @@ namespace MagicalGoods.Pages.Checkout
                 }
                 return Page();
             }
-            return RedirectToPage("/Account/Login");
+            else
+            {
+                return RedirectToPage("/Account/Login");
+            }
         }
     }
 }

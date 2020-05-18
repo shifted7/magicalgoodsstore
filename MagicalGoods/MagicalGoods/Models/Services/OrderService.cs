@@ -40,7 +40,11 @@ namespace MagicalGoods.Models.Services
 
         public async Task<Order> GetOrderByID(int id)
         {
-            var result = await _storeContext.Orders.FindAsync(id);
+            var result = await _storeContext.Orders.Where(order=> order.ID == id)
+                                                    .Include(order => order.Cart)
+                                                    .ThenInclude(cart => cart.CartProducts)
+                                                    .ThenInclude(cartProduct => cartProduct.Product)
+                                                    .FirstOrDefaultAsync();
             return result;
         }
     }
