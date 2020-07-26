@@ -186,5 +186,7 @@ Andrew Casper
 Allyson Reyes
 
 ## Sources
+
 Hero image by Cobro on Unsplash
+
 Cart icon from https://www.dreamstime.com/cart-icon-vector-medieval-items-collection-thin-line-outline-illustration-linear-symbol-use-web-mobile-apps-logo-image166042455
