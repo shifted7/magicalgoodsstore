@@ -1,16 +1,17 @@
-# E-Commerce
-
-## Andrew and Ally's Alchemical Auguries
+# Andrew and Ally's Alchemical Auguries
 ---
 ### We are deployed on Azure!
 
-Deployed: https://magicalgoodsstore.azurewebsites.net/
+https://magicalgoods.azurewebsites.net/
 
-Vulnerability Report: [Report](vulnerability-report.md)
+[Vulnerability Report](vulnerability-report.md)
 
 ---
 ## Web Application
-Our E-Commerce C# web application allows users to browse and purchase magical items. The app sends users an email via sendgrid on account creation as well as sending a receipt when checking out. On our register page, using Identity, we are grabbing our claims for our first name and last name to used to display it across our pages as well as having better security.  Administrators can access an administrator panel, product overview, and pages to add, edit, and delete products.  Users can add items to their cart, and perform a mock checkout via Authorize.Net. Product images are stored in Azure Blob Storage.
+Our E-Commerce ASP.NET MVC web application allows users to browse and purchase magical items. The store page shows each item for sale, displaying an image of the item and a price. Users can click each item to go to a details page, which has a description for the item, as well a button to add the item to their cart. If the user tries to add an item to a cart without logging in, the system will take that user to the registration page. The app sends users an email via sendgrid on account creation as well as sending a receipt when checking out. The registration page creates identity claims for our first name and last name so that the site can show this information across our pages while keeping that data secure.  Users can add items to their cart, review their cart, update item quantities, and perform a mock checkout which via an Authorize.Net sandbox account. The system then sends the user a receipt at their email via sendgrid, and the order details are saved. 
+
+Administrators can access an administrator panel, product overview, and pages to add, edit, and delete products.   Product images are stored in Azure Blob Storage (this feature is currently disabled because blob storage on Azure is expensive). Admins can also see a history of all orders, and can click each order for more details.
+
 
 ---
 ### Identity Claims
@@ -155,6 +156,9 @@ Our user database is implemented according to the default schema of Identity.
 ---
 
 ## Change Log  
+
+3.0: *App no longer crashes on startup. Redeployed on Azure. Readme updated.* 26 July 2020
+
 2.1: *Fixed bugs* 17 May 2020
 
 2.0: *Added Authorize.Net for payments, blob storage for images, updated styling and admin orders page for reviewing past orders* 10 May 2020
