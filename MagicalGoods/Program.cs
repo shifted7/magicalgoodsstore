@@ -21,7 +21,6 @@ namespace MagicalGoods
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.CaptureStartupErrors(true).UseSetting("detailed Errors", "true");
                 });
     }
 }
